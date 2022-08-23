@@ -22,8 +22,6 @@
 <script>
 import MyInput from '@/components/UI/MyInput'
 import MyButton from '@/components/UI/MyButton'
-import { doc, setDoc } from 'firebase/firestore'
-import { db } from '@/main'
 
 export default {
   components: {
@@ -47,11 +45,6 @@ export default {
         name: '',
         points: ''
       }
-      this.practices.push(practice)
-      const userRef = doc(db, 'practices', 'BwRAab6s5Z1J7b73ovgA')
-      await setDoc(userRef, {
-        practice
-      })
       this.dialogVisible = false
     }
   },

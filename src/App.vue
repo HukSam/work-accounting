@@ -93,7 +93,7 @@ import GroupForm from '@/components/GroupForm'
 import MyButton from '@/components/UI/MyButton'
 import MyDialog from '@/components/UI/MyDialog'
 import RegistrationForm from '@/components/RegistrationForm'
-import { doc, setDoc, updateDoc, deleteField, arrayUnion, onSnapshot } from 'firebase/firestore'
+import { doc, setDoc, updateDoc, deleteField, addDoc, collection, onSnapshot } from 'firebase/firestore'
 import { db } from '@/main'
 import GroupList from '@/components/GroupList'
 
@@ -156,7 +156,7 @@ export default {
         group
       })
       await updateDoc(userRef, {
-        group: arrayUnion()
+        group
       })
       this.dialogVisibleGroups = false
     },
@@ -183,17 +183,16 @@ export default {
       })
     },
     async createPractice (practice) {
-      this.practices.push(practice)
-      const userRef = doc(db, 'practice', 'BwRAab6s5Z1J7b73ovgA')
-      await setDoc(userRef, {
+      await addDoc(collection(db, 'practices'), {
         practice
       })
       this.dialogVisiblePractices = false
+      this.practices.push(practice)
     },
     async removePractice (practice) {
       this.practices = this.practices.filter(g => g.id !== practice.id)
-      const userDel = doc(db, 'practice', 'BwRAab6s5Z1J7b73ovgA')
-      await updateDoc(userDel, {
+      const userPractice = doc(db, 'practices')
+      await addDoc(userPractice, {
         practice: deleteField()
       })
     },

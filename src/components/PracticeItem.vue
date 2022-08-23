@@ -21,7 +21,7 @@
       </div>
       <div>
         <button
-          @click="$emit('remove', practice), removePractice()"
+          @click="removePractice()"
         >
           <img alt="see" src="../img/close.png">
         </button>
@@ -68,6 +68,7 @@ export default {
       console.log(practice.points)
     },
     async removePractice (practice) {
+      this.$emit('remove', practice)
       this.practices = this.practices.filter(g => g.id !== practice.id)
       const userDel = doc(db, 'practices', 'BwRAab6s5Z1J7b73ovgA')
       await updateDoc(userDel, {
