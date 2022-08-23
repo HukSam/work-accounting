@@ -1,21 +1,21 @@
 <template>
   <form @submit.prevent>
     <h4>Добавление практики</h4>
-      <my-input
-        v-model="practice.name"
-        type="text"
-        placeholder="Название практики"
-      > </my-input>
-      <my-input
-        v-model="practice.points"
-        type="text"
-        placeholder="Баллы"
-      ></my-input>
-      <my-button
-        @click="createPractice"
-      >
-        Добавить
-      </my-button>
+    <my-input
+      v-model="practice.name"
+      placeholder="Название практики"
+      type="text"
+    />
+    <my-input
+      v-model="practice.points"
+      placeholder="Баллы"
+      type="text"
+    />
+    <my-button
+      @click="createPractice"
+    >
+      Добавить
+    </my-button>
   </form>
 </template>
 
@@ -29,7 +29,7 @@ export default {
     MyButton
   },
   name: 'practice-form',
-  data () {
+  data() {
     return {
       practice: {
         name: '',
@@ -38,7 +38,7 @@ export default {
     }
   },
   methods: {
-    async createPractice (practice) {
+    async createPractice() {
       this.practice.id = Date.now()
       this.$emit('create', this.practice)
       this.practice = {

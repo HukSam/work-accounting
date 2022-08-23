@@ -3,18 +3,19 @@
     <h3>Список учеников</h3>
     <student-item
       v-for="student in students"
-      :student="student"
       :key="student.id"
+      :student="student"
       @remove="$emit('remove',student)"
-    ></student-item>
+    />
   </div>
-  <h2 style="color:#80002f" v-else>
+  <h2 v-else style="color:#80002f">
     Список студентов пуст
   </h2>
 </template>
 
 <script>
 import StudentItem from '@/components/StudentItem'
+
 export default {
   components: {
     StudentItem

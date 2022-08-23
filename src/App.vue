@@ -22,7 +22,7 @@
           <div class="info-panel-content block-add-group">
             <h1>Команды</h1>
             <my-button
-              @click="showDialogGroups" class="create-group-btn"
+              class="create-group-btn" @click="showDialogGroups"
             >
               Добавить команду
             </my-button>
@@ -33,13 +33,13 @@
               />
             </my-dialog>
             <group-list
-               :groups="groups"
-               rights="user.rights"/>
+              :groups="groups"
+              rights="user.rights"/>
           </div>
           <div class="info-panel-content block-add-practice">
             <h1>Практики</h1>
             <my-button
-              @click="showDialogPractices" class="create-practice-btn"
+              class="create-practice-btn" @click="showDialogPractices"
             >
               Добавить практику
             </my-button>
@@ -52,14 +52,14 @@
 
             <div class="wrapper-practices">
               <practice-list
-                @remove="removePractice"
-               :practices="practices"/>
+                :practices="practices"
+                @remove="removePractice"/>
             </div>
           </div>
           <div class="info-panel-content block-add-student">
             <h1>Студенты</h1>
             <my-button
-              @click="showDialogStudents" class="create-student-btn"
+              class="create-student-btn" @click="showDialogStudents"
             >
               Добавить студента
             </my-button>
@@ -72,16 +72,16 @@
 
             <div class="wrapper-groups">
               <student-list
-                :rights="user.rights"
                 :groups="groups"
-                @remove="removeStudent"
-                :students="students"/>
+                :rights="user.rights"
+                :students="students"
+                @remove="removeStudent"/>
             </div>
           </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -93,7 +93,7 @@ import GroupForm from '@/components/GroupForm'
 import MyButton from '@/components/UI/MyButton'
 import MyDialog from '@/components/UI/MyDialog'
 import RegistrationForm from '@/components/RegistrationForm'
-import { doc, setDoc, updateDoc, deleteField, addDoc, collection, onSnapshot } from 'firebase/firestore'
+import { arrayUnion, deleteField, doc, onSnapshot, setDoc, updateDoc } from 'firebase/firestore'
 import { db } from '@/main'
 import GroupList from '@/components/GroupList'
 
@@ -109,17 +109,13 @@ export default {
     PracticeList,
     RegistrationForm
   },
-  data () {
+  data() {
     return {
       uid: '',
-      user: {
-      },
-      groups: [
-      ],
-      students: [
-      ],
-      practices: [
-      ],
+      user: {},
+      groups: [],
+      students: [],
+      practices: [],
       dialogVisibleGroups: false,
       dialogVisiblePractices: false,
       dialogVisibleStudents: false,
@@ -128,13 +124,13 @@ export default {
       studentIndex: 0
     }
   },
-
-  mounted () {
+  mounted() {
     this.loadData()
+    this.subscribePractice()
   },
 
   methods: {
-    loadData () {
+    loadData() {
       if (localStorage.uid) {
         this.uid = localStorage.uid
 
@@ -149,7 +145,7 @@ export default {
       }
     },
 
-    async createGroup (group) {
+    async createGroup(group) {
       this.groups.push(group)
       const userRef = doc(db, 'groups', 'OCMGQFjLs6b3K5FCEqeV5FIJrmH2')
       await setDoc(userRef, {
@@ -160,14 +156,14 @@ export default {
       })
       this.dialogVisibleGroups = false
     },
-    async removeGroup (group) {
+    async removeGroup(group) {
       this.groups = this.groups.filter(g => g.id !== group.id)
       const userDel = doc(db, 'groups', 'OCMGQFjLs6b3K5FCEqeV5FIJrmH2')
       await updateDoc(userDel, {
         group: deleteField()
       })
     },
-    async createStudent (student) {
+    async createStudent(student) {
       this.students.push(student)
       const userRef = doc(db, 'student', 'op4moEEySSz5nlWujV3T')
       await setDoc(userRef, {
@@ -175,37 +171,41 @@ export default {
       })
       this.dialogVisibleStudents = false
     },
-    async removeStudent (student) {
+    async removeStudent(student) {
       this.students = this.students.filter(g => g.id !== student.id)
       const userDel = doc(db, 'student', 'op4moEEySSz5nlWujV3T')
       await updateDoc(userDel, {
         student: deleteField()
       })
     },
-    async createPractice (practice) {
-      await addDoc(collection(db, 'practices'), {
-        practice
+    async createPractice(practice) {
+      await updateDoc(doc(db, 'university', 'bstu'), {
+        practices: arrayUnion(practice)
       })
       this.dialogVisiblePractices = false
-      this.practices.push(practice)
     },
-    async removePractice (practice) {
+    async removePractice(practice) {
       this.practices = this.practices.filter(g => g.id !== practice.id)
-      const userPractice = doc(db, 'practices')
-      await addDoc(userPractice, {
-        practice: deleteField()
+      const userPractice = doc(db, 'university', 'bstu')
+      await updateDoc(userPractice, {
+        practices: this.practices
       })
     },
-    showDialogGroups () {
+    subscribePractice() {
+      onSnapshot(doc(db, 'university', 'bstu'), (doc) => {
+        this.practices = doc.data().practices
+      })
+    },
+    showDialogGroups() {
       this.dialogVisibleGroups = true
     },
-    showDialogPractices () {
+    showDialogPractices() {
       this.dialogVisiblePractices = true
     },
-    showDialogStudents () {
+    showDialogStudents() {
       this.dialogVisibleStudents = true
     },
-    showUserAuth () {
+    showUserAuth() {
       this.authVisible = true
     }
   }
@@ -224,7 +224,7 @@ html, body {
   line-height: 1;
   font-size: 14px;
   background-color: whitesmoke;
-  font-family: 'Montserrat',serif;
+  font-family: 'Montserrat', serif;
 }
 
 .wrapper {
@@ -246,7 +246,7 @@ html, body {
 .nav-menu {
   padding: 10px;
   display: grid;
-  grid-template-columns: repeat(3,1fr);
+  grid-template-columns: repeat(3, 1fr);
   grid-gap: 10%;
   background: #dcdcdc;
 }
@@ -256,12 +256,12 @@ html, body {
   grid-template-rows: 1fr 6fr;
 }
 
-.mainBody .info-panel{
+.mainBody .info-panel {
   display: grid;
   grid-template-columns: 3fr 3fr 3fr;
 }
 
-.mainBody .info-panel .item *{
+.mainBody .info-panel .item * {
   max-height: 35px;
   border: 2px solid red;
 }
@@ -293,10 +293,10 @@ html, body {
   overflow: hidden;
 }
 
-.info-panel >:hover{
+.info-panel > :hover {
   border: none;
-  border-radius:20px;
-  box-shadow:0 0 0 4px black;
+  border-radius: 20px;
+  box-shadow: 0 0 0 4px black;
 }
 
 .create-group-btn,

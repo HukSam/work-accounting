@@ -10,23 +10,23 @@
         <button
           @click="showStudentInfo"
         >
-          <img alt="edit" src="../img/edit.png">
+          <img alt="edit" src="../img/edit.png"/>
         </button>
         <my-dialog
           v-model:show="studentInfo"
         >
-          <practice-info :student="student">
-          </practice-info>
+          <practice-info :student="student"/>
         </my-dialog>
       </div>
       <div>
         <button
           @click="$emit('remove', student)"
         >
-          <img alt="see" src="../img/close.png">
+          <img alt="see" src="../img/close.png"/>
         </button>
       </div>
     </div>
+
 
   </div>
 </template>
@@ -34,12 +34,13 @@
 <script>
 import MyDialog from '@/components/UI/MyDialog'
 import PracticeInfo from '@/components/StudentInfo'
+
 export default {
   components: {
     MyDialog,
     PracticeInfo
   },
-  data () {
+  data() {
     return {
       studentInfo: false
     }
@@ -51,7 +52,7 @@ export default {
     }
   },
   methods: {
-    showStudentInfo () {
+    showStudentInfo() {
       this.studentInfo = true
     }
   }

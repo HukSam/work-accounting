@@ -4,26 +4,26 @@
       <div class="strong">{{ practice.name }}</div>
       <div class="strong"><strong>Оценка -</strong></div>
       <div class="strong wrapper-points"><strong>Баллы: </strong></div>
-      <div class="strong" ><input value="Введите значение" type="submit" id="result" ></div>
+      <div class="strong"><input id="result" type="submit" value="Введите значение"/></div>
     </div>
     <div class="practice-btns">
       <div>
         <button id="done-btn"
-          @click="confirmPoints"
+                @click="confirmPoints"
         >
-          <img alt="see" src="../img/doneEditStudent.png">
+          <img alt="see" src="../img/doneEditStudent.png"/>
         </button>
         <button id="edit-btn"
-          @click="editPoints"
+                @click="editPoints"
         >
-          <img alt="see" src="../img/edit.png">
+          <img alt="see" src="../img/edit.png"/>
         </button>
       </div>
       <div>
         <button
           @click="removePractice()"
         >
-          <img alt="see" src="../img/close.png">
+          <img alt="see" src="../img/close.png"/>
         </button>
       </div>
     </div>
@@ -33,14 +33,11 @@
 <script>
 // import MyDialog from '@/components/UI/MyDialog'
 
-import { deleteField, doc, updateDoc } from 'firebase/firestore'
-import { db } from '@/main'
-
 export default {
   components: {
     // MyDialog
   },
-  data () {
+  data() {
     return {
       practiceInfo: false
     }
@@ -52,14 +49,14 @@ export default {
     }
   },
   methods: {
-    editPoints () {
+    editPoints() {
       console.log('сработало edit')
       document.getElementById('result').style.display = 'inline'
       document.getElementById('result').type = 'text'
       document.getElementById('done-btn').style.display = 'inline'
       document.getElementById('edit-btn').style.display = 'none'
     },
-    confirmPoints (practice) {
+    confirmPoints(practice) {
       console.log('сработало confirm')
       document.getElementById('edit-btn').style.display = 'inline'
       document.getElementById('done-btn').style.display = 'none'
@@ -67,13 +64,8 @@ export default {
       document.getElementsByClassName('wrapper-points').innerHTML += document.getElementById('result').value
       console.log(practice.points)
     },
-    async removePractice (practice) {
+    async removePractice(practice) {
       this.$emit('remove', practice)
-      this.practices = this.practices.filter(g => g.id !== practice.id)
-      const userDel = doc(db, 'practices', 'BwRAab6s5Z1J7b73ovgA')
-      await updateDoc(userDel, {
-        practice: deleteField()
-      })
     }
   }
 }
@@ -106,7 +98,7 @@ export default {
 .strong {
   border-right: 2px solid #c0c0c0;
   height: 100%;
-  margin-left:10px;
+  margin-left: 10px;
   padding-right: 10px;
 }
 
@@ -123,7 +115,7 @@ button {
 }
 
 .wrapper-points {
-display: none;
+  display: none;
 }
 
 #result {

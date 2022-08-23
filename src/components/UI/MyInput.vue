@@ -1,5 +1,5 @@
 <template>
-  <input :value="modelValue" @input="updateInput" class="input" type="text">
+  <input :value="modelValue" class="input" type="text" @input="updateInput"/>
 </template>
 
 <script>
@@ -9,7 +9,7 @@ export default {
     modelValue: [String, Number]
   },
   methods: {
-    updateInput (event) {
+    updateInput(event) {
       this.$emit('update:modelValue', event.target.value)
     }
   }

@@ -1,26 +1,26 @@
 <template>
   <form
-    @submit.prevent="register"
     id="registration"
+    @submit.prevent="register"
   >
     <h4>Регистрация</h4>
     <my-input
       v-model="user.email"
-      type="text"
       placeholder="Email:"
-    ></my-input>
+      type="text"
+    />
     <my-input
       v-model="user.password"
-      type="password"
       placeholder="Пароль:"
-    ></my-input>
+      type="password"
+    />
     <my-input
       v-model="user.repeatedPassword"
-      type="password"
       placeholder="Подтверждение пароля:"
-    ></my-input>
+      type="password"
+    />
 
-    <select v-model="user.rights" name="rights" id="rights">
+    <select id="rights" v-model="user.rights" name="rights">
       Выберите роль
       <option selected value="student">Студент</option>
       <option value="leader">Лидер</option>
@@ -33,10 +33,7 @@
 
 <script>
 import MyInput from '@/components/UI/MyInput'
-import {
-  createUserWithEmailAndPassword,
-  getAuth
-} from 'firebase/auth'
+import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth'
 
 import { doc, setDoc } from 'firebase/firestore'
 
@@ -48,7 +45,7 @@ export default {
     MyInput
   },
   name: 'registration-form',
-  data () {
+  data() {
     return {
       user: {
         email: '',
@@ -60,7 +57,7 @@ export default {
     }
   },
   methods: {
-    async register () {
+    async register() {
       if (this.user.password === this.user.repeatedPassword) {
         this.user.id = Date.now()
         this.$emit('create', this.user)

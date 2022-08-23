@@ -2,16 +2,15 @@
   <div class="wrapper-practice-info-add">
     <h2>Информация о студенте</h2>
     <my-button class="btn-add-practice"
-      @click="showDialog"
+               @click="showDialog"
     >
       Добавить практику
     </my-button>
     <my-dialog v-model:show="dialogVisible">
       <practice-list
-        @remove="removePractice"
         :practices="practices"
-      >
-      </practice-list>
+        @remove="removePractice"
+      />
     </my-dialog>
 
   </div>
@@ -30,7 +29,7 @@ export default {
     MyDialog,
     MyButton
   },
-  data () {
+  data() {
     return {
       dialogVisible: false
     }
@@ -49,14 +48,14 @@ export default {
   },
   name: 'practice-info',
   methods: {
-    async removePractice (practice) {
+    async removePractice(practice) {
       this.practices = this.practices.filter(g => g.id !== practice.id)
       const userDel = doc(db, 'practices', 'BwRAab6s5Z1J7b73ovgA')
       await updateDoc(userDel, {
         practice: deleteField()
       })
     },
-    showDialog () {
+    showDialog() {
       this.dialogVisible = true
     }
   }

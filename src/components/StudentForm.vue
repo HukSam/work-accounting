@@ -1,16 +1,16 @@
 <template>
   <form @submit.prevent>
-  <h4>Добавление студента</h4>
+    <h4>Добавление студента</h4>
     <my-input
       v-model="student.name"
-      type="text"
       placeholder="Фамилия"
-    > </my-input>
+      type="text"
+    />
     <my-input
       v-model="student.points"
-      type="text"
       placeholder="Баллы"
-    ></my-input>
+      type="text"
+    />
     <my-button
       @click="createUser"
     >
@@ -29,7 +29,7 @@ export default {
     MyButton
   },
   name: 'student-form',
-  data () {
+  data() {
     return {
       student: {
         name: '',
@@ -39,7 +39,7 @@ export default {
     }
   },
   methods: {
-    createUser () {
+    createUser() {
       this.student.id = Date.now()
       this.$emit('create', this.student)
       this.student = {
@@ -66,6 +66,7 @@ img {
   max-width: 25px;
   min-width: 25px;
 }
+
 .wrapper-new-student {
   grid-template-columns: 4fr 4fr 1fr;
   display: grid;

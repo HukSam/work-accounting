@@ -3,17 +3,17 @@
     <h4>Добавление группы</h4>
     <my-input
       v-model="group.leadName"
-      type="text"
       placeholder="Лидер:"
-    ></my-input>
+      type="text"
+    />
     <my-input
       v-model="group.points"
-      type="text"
       placeholder="Баллы:"
-    ></my-input>
+      type="text"
+    />
     <my-button
-      @click="createGroup"
       :rights="rights"
+      @click="createGroup"
     >
       Создать команду
     </my-button>
@@ -29,7 +29,7 @@ export default {
     MyInput,
     MyButton
   },
-  data () {
+  data() {
     return {
       group: {
         leadName: '',
@@ -44,7 +44,7 @@ export default {
     }
   },
   methods: {
-    createGroup () {
+    createGroup() {
       this.group.id = Date.now()
       this.$emit('create', this.group)
       this.group = {
@@ -62,6 +62,7 @@ form {
   flex-direction: column;
   font-size: 30px;
 }
+
 h4 {
   margin: 10px;
 }

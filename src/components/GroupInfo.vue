@@ -1,7 +1,8 @@
 <template>
   <div class="wrapper-student-info-add">
     <h2>Информация о группе</h2>
-    <my-button class="btn-add-student"
+    <my-button
+      class="btn-add-student"
       @click="showDialog"
     >
       Добавить студента
@@ -11,11 +12,10 @@
         @create="createStudent"
       />
     </my-dialog>
-      <student-list
-        :students="students"
-        @remove="removeStudent"
-      >
-      </student-list>
+    <student-list
+      :students="students"
+      @remove="removeStudent"
+    />
   </div>
 </template>
 
@@ -34,11 +34,10 @@ export default {
     MyDialog,
     MyButton
   },
-  data () {
+  data() {
     return {
       students:
-        [
-        ],
+        [],
       dialogVisible: false
     }
   },
@@ -55,7 +54,7 @@ export default {
 
   name: 'group-info',
   methods: {
-    async createStudent (student) {
+    async createStudent(student) {
       this.students.push(student)
       const userRef = doc(db, 'student', 'op4moEEySSz5nlWujV3T')
       await setDoc(userRef, {
@@ -63,14 +62,14 @@ export default {
       })
       this.dialogVisible = false
     },
-    async removeStudent (student) {
+    async removeStudent(student) {
       this.students = this.students.filter(g => g.id !== student.id)
       const userDel = doc(db, 'student', 'op4moEEySSz5nlWujV3T')
       await updateDoc(userDel, {
         student: deleteField()
       })
     },
-    showDialog () {
+    showDialog() {
       this.dialogVisible = true
     }
   }

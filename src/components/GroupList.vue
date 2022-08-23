@@ -3,11 +3,11 @@
     <h3>Список групп</h3>
     <group-item
       v-for="group in groups"
+      :key="group.id"
       :group="group"
       :rights="rights"
-      :key="group.id"
       @remove="$emit('remove',group)"
-    ></group-item>
+    />
   </div>
   <h2 v-else>
     Список команд пуст
@@ -16,15 +16,15 @@
 
 <script>
 import GroupItem from '@/components/GroupItem'
+
 export default {
   components: {
     GroupItem
   },
-  data () {
+  data() {
     return {
       studentPractice:
-        [
-        ]
+        []
     }
   },
   props: {

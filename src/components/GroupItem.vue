@@ -10,25 +10,22 @@
         <button
           @click="showGroupInfo"
         >
-          <img alt="see" src="../img/see.png">
+          <img alt="see" src="../img/see.png"/>
         </button>
         <my-dialog
           v-model:show="groupInfo"
         >
-          <group-info :groups="group" rights="">
-
-          </group-info>
+          <group-info :groups="group" rights=""/>
         </my-dialog>
       </div>
 
-      <div >
+      <div>
         <button
           @click="$emit('remove', group)"
         >
-          <img alt="see" src="../img/close.png">
+          <img alt="see" src="../img/close.png"/>
         </button>
       </div>
-
     </div>
 
   </div>
@@ -43,7 +40,7 @@ export default {
     GroupInfo,
     MyDialog
   },
-  data () {
+  data() {
     return {
       groupInfo: false
     }
@@ -61,7 +58,7 @@ export default {
   },
 
   methods: {
-    showGroupInfo () {
+    showGroupInfo() {
       this.groupInfo = true
     }
   }
