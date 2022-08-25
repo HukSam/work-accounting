@@ -34,7 +34,8 @@
             </my-dialog>
             <group-list
               :groups="groups"
-              rights="user.rights"/>
+              rights="user.rights"
+              @remove="removeGroup"/>
           </div>
           <div class="info-panel-content block-add-practice">
             <h1>Практики</h1>

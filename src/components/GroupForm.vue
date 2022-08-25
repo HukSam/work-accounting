@@ -44,13 +44,14 @@ export default {
     }
   },
   methods: {
-    createGroup() {
+    async createGroup() {
       this.group.id = Date.now()
       this.$emit('create', this.group)
       this.group = {
         leadName: '',
         points: ''
       }
+      this.dialogVisible = false
     }
   }
 }
