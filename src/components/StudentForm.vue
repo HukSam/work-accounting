@@ -28,7 +28,6 @@ export default {
     MyInput,
     MyButton
   },
-  name: 'student-form',
   data() {
     return {
       student: {
@@ -65,10 +64,5 @@ h4 {
 img {
   max-width: 25px;
   min-width: 25px;
-}
-
-.wrapper-new-student {
-  grid-template-columns: 4fr 4fr 1fr;
-  display: grid;
 }
 </style>

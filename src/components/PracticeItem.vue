@@ -50,14 +50,12 @@ export default {
   },
   methods: {
     editPoints() {
-      console.log('сработало edit')
       document.getElementById('result').style.display = 'inline'
       document.getElementById('result').type = 'text'
       document.getElementById('done-btn').style.display = 'inline'
       document.getElementById('edit-btn').style.display = 'none'
     },
     confirmPoints(practice) {
-      console.log('сработало confirm')
       document.getElementById('edit-btn').style.display = 'inline'
       document.getElementById('done-btn').style.display = 'none'
       practice.points = document.getElementById('result').value

@@ -93,7 +93,7 @@ import GroupForm from '@/components/GroupForm'
 import MyButton from '@/components/UI/MyButton'
 import MyDialog from '@/components/UI/MyDialog'
 import RegistrationForm from '@/components/RegistrationForm'
-import { arrayUnion, deleteField, doc, onSnapshot, setDoc, updateDoc } from 'firebase/firestore'
+import { arrayUnion, doc, onSnapshot, updateDoc } from 'firebase/firestore'
 import { db } from '@/main'
 import GroupList from '@/components/GroupList'
 
@@ -127,6 +127,8 @@ export default {
   mounted() {
     this.loadData()
     this.subscribePractice()
+    this.subscribeStudent()
+    this.subscribeGroup()
   },
 
   methods: {
@@ -146,36 +148,39 @@ export default {
     },
 
     async createGroup(group) {
-      this.groups.push(group)
-      const userRef = doc(db, 'groups', 'OCMGQFjLs6b3K5FCEqeV5FIJrmH2')
-      await setDoc(userRef, {
-        group
-      })
-      await updateDoc(userRef, {
-        group
+      await updateDoc(doc(db, 'university', 'bstu'), {
+        groups: arrayUnion(group)
       })
       this.dialogVisibleGroups = false
     },
     async removeGroup(group) {
       this.groups = this.groups.filter(g => g.id !== group.id)
-      const userDel = doc(db, 'groups', 'OCMGQFjLs6b3K5FCEqeV5FIJrmH2')
-      await updateDoc(userDel, {
-        group: deleteField()
+      const userGroup = doc(db, 'university', 'bstu')
+      await updateDoc(userGroup, {
+        groups: this.groups
+      })
+    },
+    subscribeGroup() {
+      onSnapshot(doc(db, 'university', 'bstu'), (doc)=>{
+        this.groups = doc.data().groups
       })
     },
     async createStudent(student) {
-      this.students.push(student)
-      const userRef = doc(db, 'student', 'op4moEEySSz5nlWujV3T')
-      await setDoc(userRef, {
-        student
+      await updateDoc(doc(db, 'university', 'bstu'), {
+        students: arrayUnion(student)
       })
       this.dialogVisibleStudents = false
     },
     async removeStudent(student) {
       this.students = this.students.filter(g => g.id !== student.id)
-      const userDel = doc(db, 'student', 'op4moEEySSz5nlWujV3T')
-      await updateDoc(userDel, {
-        student: deleteField()
+      const userStudent = doc(db, 'university', 'bstu')
+      await updateDoc(userStudent, {
+        students: this.students
+      })
+    },
+    subscribeStudent() {
+      onSnapshot(doc(db,'university', 'bstu'), (doc)=>{
+        this.students = doc.data().students
       })
     },
     async createPractice(practice) {
