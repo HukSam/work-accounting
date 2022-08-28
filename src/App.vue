@@ -70,12 +70,12 @@
                 @create="createStudent"
               />
             </my-dialog>
-
             <div class="wrapper-groups">
               <student-list
                 :groups="groups"
                 :rights="user.rights"
                 :students="students"
+                :practices="practices"
                 @remove="removeStudent"/>
             </div>
           </div>

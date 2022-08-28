@@ -15,7 +15,7 @@
         <my-dialog
           v-model:show="studentInfo"
         >
-          <practice-info :student="student"/>
+          <practice-info :practices="practices"/>
         </my-dialog>
       </div>
       <div>
@@ -26,8 +26,6 @@
         </button>
       </div>
     </div>
-
-
   </div>
 </template>
 
@@ -48,6 +46,10 @@ export default {
   props: {
     student: {
       type: Object,
+      required: true
+    },
+    practices: {
+      type: Array,
       required: true
     }
   },

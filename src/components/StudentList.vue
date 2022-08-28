@@ -5,6 +5,7 @@
       v-for="student in students"
       :key="student.id"
       :student="student"
+      :practices="practices"
       @remove="$emit('remove',student)"
     />
   </div>
@@ -22,6 +23,10 @@ export default {
   },
   props: {
     students: {
+      type: Array,
+      required: true
+    },
+    practices: {
       type: Array,
       required: true
     }

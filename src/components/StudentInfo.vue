@@ -7,12 +7,14 @@
       Добавить практику
     </my-button>
     <my-dialog v-model:show="dialogVisible">
-      <practice-list
+      <student-practices-list
+        :students="students"
         :practices="practices"
-        @remove="removePractice"
       />
     </my-dialog>
-
+    <practice-list
+      :practices="practices"
+    />
   </div>
 </template>
 
@@ -20,11 +22,11 @@
 import PracticeList from '@/components/PracticeList'
 import MyDialog from '@/components/UI/MyDialog'
 import MyButton from '@/components/UI/MyButton'
-import { deleteField, doc, updateDoc } from 'firebase/firestore'
-import { db } from '@/main'
+import StudentPracticesList from '@/components/StudentPracticesList'
 
 export default {
   components: {
+    StudentPracticesList,
     PracticeList,
     MyDialog,
     MyButton
@@ -35,26 +37,13 @@ export default {
     }
   },
   props: {
-    student: {
-      type: Object,
+    practices: {
+      type: Array,
       required: true
-    },
-    props: {
-      practice: {
-        type: Array,
-        required: true
       }
-    }
   },
   name: 'practice-info',
   methods: {
-    async removePractice(practice) {
-      this.practices = this.practices.filter(g => g.id !== practice.id)
-      const userDel = doc(db, 'practices', 'BwRAab6s5Z1J7b73ovgA')
-      await updateDoc(userDel, {
-        practice: deleteField()
-      })
-    },
     showDialog() {
       this.dialogVisible = true
     }
