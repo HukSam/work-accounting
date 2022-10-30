@@ -19,7 +19,11 @@
       placeholder="Подтверждение пароля:"
       type="password"
     />
-
+    <my-dialog v-model:show="dialogVisible">
+      <div class="alertGuest">
+        <p>123123</p>
+      </div>
+    </my-dialog>
     <select id="rights" v-model="user.rights" name="rights">
       Выберите роль
       <option selected value="student">Студент</option>
@@ -53,7 +57,14 @@ export default {
         repeatedPassword: '',
         rights: 'Студент'
       },
-      errors: []
+      props: {
+        students: {
+          type: Array,
+          required: true
+        }
+      },
+      errors: [],
+      dialogVisible: false
     }
   },
   methods: {
@@ -67,15 +78,25 @@ export default {
             const user = userCredential.user
 
             await setDoc(doc(db, 'users', user.uid), {
-              rights: this.user.rights
+              rights: this.user.rights,
+              email: this.user.email,
+              guest: true
             })
-
+            console.log(userCredential)
             localStorage.uid = user.uid
+            for (const emailValidation of this.students.email) {
+              if (this.user.email !== emailValidation) {
+                this.dialogVisible = true
+                this.user.rights = 'Гость'
+              }
+            }
           },
           (err) => {
             alert(err)
           }
         )
+      } else {
+        alert('Пароли не совпадают!')
       }
     }
   }
@@ -103,5 +124,14 @@ p {
 
 span {
   font-size: 14px;
+}
+
+.alertGuest {
+  position: fixed; /* or absolute */
+  top: 50%;
+  left: 50%;
+  width: 200px;
+  height:100px;
+  transform: translate(-50%, -50%);
 }
 </style>

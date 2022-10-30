@@ -11,6 +11,11 @@
       placeholder="Баллы"
       type="text"
     />
+    <my-input
+      v-model="student.email"
+      placeholder="Почта"
+      type="email"
+    />
     <my-button
       @click="createUser"
     >
@@ -33,7 +38,8 @@ export default {
       student: {
         name: '',
         points: '',
-        mark: ''
+        mark: '',
+        email: ''
       }
     }
   },

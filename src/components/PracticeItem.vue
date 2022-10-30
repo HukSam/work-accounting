@@ -2,8 +2,7 @@
   <div class="practice">
     <div class="practice-data">
       <div class="strong">{{ practice.name }}</div>
-      <div class="strong"><strong>Оценка -</strong></div>
-      <div class="strong wrapper-points"><strong>Баллы: </strong></div>
+      <div class="strong wrapper-points"><strong>Баллы: {{ practice.points }}</strong></div>
       <div class="strong"><input id="result" type="submit" value="Введите значение"/></div>
     </div>
     <div class="practice-btns">
@@ -75,17 +74,19 @@ export default {
   border: 2px solid #c0c0c0;
   display: grid;
   grid-template-columns:8fr 2fr;
+  height: 50px;
 }
 
 .practice-data {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 4fr 2fr 1fr;
 }
 
 .practice-data * {
   display: flex;
   align-items: center;
   justify-content: center;
+  max-height: 46px;
 }
 
 .practice-btns {
@@ -112,10 +113,6 @@ button {
   cursor: pointer;
 }
 
-.wrapper-points {
-  display: none;
-}
-
 #result {
   display: none;
 }
@@ -126,7 +123,7 @@ button {
 
 img {
   padding: 5px;
-  max-width: 35px;
-  min-width: 35px;
+  max-width: 40px;
+  min-width: 40px;
 }
 </style>

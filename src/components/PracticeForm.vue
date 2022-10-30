@@ -34,6 +34,10 @@ export default {
       practice: {
         name: '',
         points: ''
+      },
+      studentPractice: {
+        name: '',
+        points: ''
       }
     }
   },

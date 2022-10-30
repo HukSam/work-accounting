@@ -2,7 +2,6 @@
   <div class="group">
     <div class="group-data">
       <div class="strong"><strong>Лидер: </strong>{{ group.leadName }}</div>
-      <div class="strong"><strong>Оценки</strong></div>
       <div class="strong"><strong>Баллы: {{ group.points }}</strong></div>
     </div>
     <div class="group-btns">
@@ -71,12 +70,12 @@ export default {
   border: 2px solid #c0c0c0;
   display: grid;
   grid-template-columns:8fr 2fr;
-  min-height: 50px;
+  height: 50px;
 }
 
 .group-data {
   display: grid;
-  grid-template-columns: 3fr 1fr 1fr;
+  grid-template-columns: 3fr 2fr;
 
 }
 
@@ -116,5 +115,16 @@ button {
 img {
   max-width: 40px;
   min-width: 40px;
+}
+
+@media (max-width: 390px) {
+  .group-data {
+    grid-template-columns: 2fr;
+    grid-template-rows: auto;
+  }
+  .group-btns {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
 }
 </style>

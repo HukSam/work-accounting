@@ -1,18 +1,18 @@
 <template>
   <div class="wrapper-practice-info-add">
-    <h2>Информация о студенте</h2>
+    <h2>Информация о студенте {{student.name}} </h2>
     <my-button class="btn-add-practice"
                @click="showDialog"
     >
       Добавить практику
     </my-button>
     <my-dialog v-model:show="dialogVisible">
-      <student-practices-list
-        :students="students"
+      <practice-list
         :practices="practices"
       />
     </my-dialog>
-    <practice-list
+    <student-practices-list
+      :studentPractises="studentPractises"
       :practices="practices"
     />
   </div>
@@ -40,9 +40,21 @@ export default {
     practices: {
       type: Array,
       required: true
-      }
+      },
+    student: {
+      type: Object,
+      required: true
+    },
+    studentPractises: {
+      type: Array,
+      required: true
+    },
+    studentInfoSearch: {
+      type: Boolean,
+      required: true
+    }
   },
-  name: 'practice-info',
+  name: 'student-info',
   methods: {
     showDialog() {
       this.dialogVisible = true

@@ -4,14 +4,41 @@
       <div class="nav-menu">
         <div class="item group"><h2>ГРУППА: О-20-ПРИ</h2></div>
         <div class="item mode"><h2>РЕЖИМ:</h2></div>
+        <div class="search-input">
+          <my-input
+            type="search"
+            v-model="searchingStudent"
+            aria-autocomplete="none"
+            @input="searchedStudents"
+          />
+          <div
+            v-if="filteredStudents"
+            @click="showStudentInfoSearch"
+          >
+            <ul>
+              <li
+                v-for="filteredStudent in filteredStudents"
+                :key="filteredStudent.id"
+                @click="setStudent(filteredStudent)"
+
+              >
+                {{filteredStudent.name}}
+              </li>
+            </ul>
+          </div>
+        </div>
         <div class="item auth">
           <my-button
             @click="showUserAuth"
           >
-            ВХОД / РЕГИСТРАЦИЯ
+            <span>
+              ВХОД / РЕГИСТРАЦИЯ
+            </span>
+            <img src="./img/sign-in.png" alt="signIn"/>
           </my-button>
           <my-dialog v-model:show="authVisible">
             <registration-form
+              :students="students"
             />
           </my-dialog>
         </div>
@@ -72,6 +99,7 @@
             </my-dialog>
             <div class="wrapper-groups">
               <student-list
+                :studentInfoSearch="studentInfoSearch"
                 :groups="groups"
                 :rights="user.rights"
                 :students="students"
@@ -93,6 +121,7 @@ import PracticeList from '@/components/PracticeList'
 import GroupForm from '@/components/GroupForm'
 import MyButton from '@/components/UI/MyButton'
 import MyDialog from '@/components/UI/MyDialog'
+import MyInput from '@/components/UI/MyInput'
 import RegistrationForm from '@/components/RegistrationForm'
 import { arrayUnion, doc, onSnapshot, updateDoc } from 'firebase/firestore'
 import { db } from '@/main'
@@ -106,6 +135,7 @@ export default {
     MyButton,
     GroupForm,
     MyDialog,
+    MyInput,
     PracticeForm,
     PracticeList,
     RegistrationForm
@@ -116,11 +146,15 @@ export default {
       user: {},
       groups: [],
       students: [],
+      searchQuery:'',
+      filteredStudents: [],
+      searchingStudent: '',
       practices: [],
       dialogVisibleGroups: false,
       dialogVisiblePractices: false,
       dialogVisibleStudents: false,
       authVisible: false,
+      studentInfoSearch: false,
       groupIndex: 0,
       studentIndex: 0
     }
@@ -130,8 +164,8 @@ export default {
     this.subscribePractice()
     this.subscribeStudent()
     this.subscribeGroup()
+    this.filterStudents()
   },
-
   methods: {
     loadData() {
       if (localStorage.uid) {
@@ -147,7 +181,22 @@ export default {
         )
       }
     },
-
+    showStudentInfoSearch() {
+      this.studentInfoSearch = true
+    },
+    filterStudents () {
+      if (this.searchingStudent.length === 0) {
+        this.filteredStudents = this.students
+      }
+    },
+    searchedStudents () {
+      this.filteredStudents = this.students.filter(searchingStudent => {
+        return searchingStudent.name.toLowerCase().startsWith(this.searchingStudent.toLowerCase())
+      })
+    },
+    setStudent(searchingStudent) {
+      this.searchingStudent = searchingStudent.name
+    },
     async createGroup(group) {
       await updateDoc(doc(db, 'university', 'bstu'), {
         groups: arrayUnion(group)
@@ -219,6 +268,9 @@ export default {
 </script>
 
 <style>
+*{
+  box-sizing: border-box;
+}
 button {
   padding: 0;
 }
@@ -252,9 +304,15 @@ html, body {
 .nav-menu {
   padding: 10px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 10%;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 10px;
   background: #dcdcdc;
+}
+
+.nav-menu input {
+  max-width: 280px;
+  max-height: 40px;
+  border: none;
 }
 
 .mainBody {
@@ -265,6 +323,15 @@ html, body {
 .mainBody .info-panel {
   display: grid;
   grid-template-columns: 3fr 3fr 3fr;
+}
+
+.nav-menu .auth .btn img{
+  display: none;
+}
+
+.nav-menu .auth{
+  margin-left: 200px;
+  max-width: 300px;
 }
 
 .mainBody .info-panel .item * {
@@ -312,4 +379,105 @@ html, body {
   align-items: center;
   justify-content: center;
 }
+
+.search-input {
+  position: relative;
+  max-width: 200px;
+}
+
+.search-input li {
+  list-style-type: none;
+  padding: 5px;
+}
+
+.search-input ul {
+  margin: 0;
+}
+
+.search-input div {
+  width: 200px;
+  position: absolute;
+  background: white;
+  cursor: pointer;
+}
+
+@media (max-width: 1310px) {
+  .mainBody .info-panel {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+  }
+}
+@media (max-width: 970px) {
+  .mainBody .info-panel {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+  }
+  .nav-menu .auth{
+    margin-left: 0;
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 625px) {
+  .nav-menu .auth .btn img{
+    display: inline-block;
+    max-height: 30px;
+  }
+  .nav-menu .auth span{
+    display: none;
+  }
+
+}
+
+@media (max-width: 530px){
+  .nav-menu .auth .btn img{
+    display: inline-block;
+    max-height: 30px;
+  }
+  .nav-menu .auth .btn{
+    padding: 0 20px;
+    margin: 0;
+  }
+  .nav-menu .auth {
+    margin: auto;
+  }
+  .nav-menu {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto auto;
+  }
+}
+@media (max-width:450px){
+  .nav-menu .auth {
+    max-width: 15%;
+  }
+  .nav-menu {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+  }
+  .nav-menu .group h2,
+  .nav-menu .mode h2
+  {
+    font-size: 18px;
+    margin: 5px;
+  }
+  .nav-menu .auth span{
+    display: none;
+  }
+  .nav-menu .auth .btn img{
+    display: inline-block;
+    max-height: 30px;
+  }
+  .nav-menu .auth .btn{
+    padding: 0 20px;
+    margin: 0;
+  }
+  .nav-menu .auth {
+    margin: auto;
+  }
+  .mainBody .info-panel {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+  }
+}
+
 </style>

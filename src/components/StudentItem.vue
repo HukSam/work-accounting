@@ -1,7 +1,7 @@
 <template>
   <div class="group">
     <div class="group-data">
-      <div class="strong"><strong>Фамилия - </strong>{{ student.name }}</div>
+      <div class="strong"><strong>Имя - </strong>{{ student.name }}</div>
       <div class="strong"><strong>Оценка - </strong></div>
       <div class="strong"><strong>Баллы: {{ student.points }}</strong></div>
     </div>
@@ -15,7 +15,12 @@
         <my-dialog
           v-model:show="studentInfo"
         >
-          <practice-info :practices="practices"/>
+          <student-info
+            :practices="practices"
+            :student="student"
+            :studentPractises="studentPractises"
+            :studentInfoSearch="studentInfoSearch"
+          />
         </my-dialog>
       </div>
       <div>
@@ -31,16 +36,17 @@
 
 <script>
 import MyDialog from '@/components/UI/MyDialog'
-import PracticeInfo from '@/components/StudentInfo'
+import StudentInfo from '@/components/StudentInfo'
 
 export default {
   components: {
     MyDialog,
-    PracticeInfo
+    StudentInfo
   },
   data() {
     return {
-      studentInfo: false
+      studentPractises: [],
+      studentInfo: false,
     }
   },
   props: {
@@ -51,6 +57,10 @@ export default {
     practices: {
       type: Array,
       required: true
+    },
+    studentInfoSearch: {
+      type: Boolean,
+      required: false
     }
   },
   methods: {
@@ -67,7 +77,7 @@ export default {
   border: 2px solid #dcdcdc;
   display: grid;
   grid-template-columns:8fr 2fr;
-  min-height: 50px;
+  height: 50px;
 }
 
 .group-data {
@@ -79,6 +89,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: left;
+  max-height: 46px;
 }
 
 .group-btns {
@@ -110,7 +121,7 @@ button {
 
 img {
   padding: 5px;
-  max-width: 35px;
-  min-width: 35px;
+  max-width: 40px;
+  min-width: 40px;
 }
 </style>
