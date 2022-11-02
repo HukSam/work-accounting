@@ -12,7 +12,7 @@
 
       />
     </my-dialog>
-    <student-practices-list
+    <practice-list
       :studentPractises="studentPractises"
       :practices="studentPractices"
     />
@@ -23,11 +23,9 @@
 import PracticeList from '@/components/PracticeList'
 import MyDialog from '@/components/UI/MyDialog'
 import MyButton from '@/components/UI/MyButton'
-import StudentPracticesList from '@/components/StudentPracticesList'
 
 export default {
   components: {
-    StudentPracticesList,
     PracticeList,
     MyDialog,
     MyButton
