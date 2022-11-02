@@ -33,7 +33,8 @@ export default {
     return {
       practice: {
         name: '',
-        points: ''
+        points: '',
+        uid: []
       },
       studentPractice: {
         name: '',

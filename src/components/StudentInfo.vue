@@ -9,11 +9,12 @@
     <my-dialog v-model:show="dialogVisible">
       <practice-list
         :practices="practices"
+
       />
     </my-dialog>
     <student-practices-list
       :studentPractises="studentPractises"
-      :practices="practices"
+      :practices="studentPractices"
     />
   </div>
 </template>
@@ -36,6 +37,11 @@ export default {
       dialogVisible: false
     }
   },
+  computed: {
+    studentPractices() {
+      return this.practices.filter(practices => practices.uid.includes(this.student.id))
+    }
+  },
   props: {
     practices: {
       type: Array,
@@ -55,6 +61,9 @@ export default {
     }
   },
   name: 'student-info',
+  mounted() {
+
+  },
   methods: {
     showDialog() {
       this.dialogVisible = true
