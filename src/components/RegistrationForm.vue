@@ -1,6 +1,5 @@
 <template>
   <form
-    id="registration"
     @submit.prevent="register"
   >
     <h4>Регистрация</h4>
@@ -19,11 +18,6 @@
       placeholder="Подтверждение пароля:"
       type="password"
     />
-    <my-dialog v-model:show="dialogVisible">
-      <div class="alertGuest">
-        <p>123123</p>
-      </div>
-    </my-dialog>
     <select id="rights" v-model="user.rights" name="rights">
       Выберите роль
       <option selected value="student">Студент</option>
@@ -55,7 +49,7 @@ export default {
         email: '',
         password: '',
         repeatedPassword: '',
-        rights: 'Студент'
+        rights: ''
       },
       props: {
         students: {
@@ -82,14 +76,8 @@ export default {
               email: this.user.email,
               guest: true
             })
-            console.log(userCredential)
             localStorage.uid = user.uid
-            for (const emailValidation of this.students.email) {
-              if (this.user.email !== emailValidation) {
-                this.dialogVisible = true
-                this.user.rights = 'Гость'
-              }
-            }
+            this.$emit('hide')
           },
           (err) => {
             alert(err)

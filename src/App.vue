@@ -36,8 +36,9 @@
             </span>
             <img src="./img/sign-in.png" alt="signIn"/>
           </my-button>
-          <my-dialog v-model:show="authVisible">
+          <my-dialog :show="authVisible">
             <registration-form
+              @hide="regHide"
               :students="students"
             />
           </my-dialog>
@@ -262,6 +263,9 @@ export default {
     },
     showUserAuth() {
       this.authVisible = true
+    },
+    regHide() {
+      this.authVisible = false
     }
   }
 }
