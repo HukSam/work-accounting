@@ -1,13 +1,20 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import components from '@/components/UI'
 import { getFirestore } from 'firebase/firestore'
 import { initializeApp } from 'firebase/app'
+import '@/css/main.scss'
+import { createPinia } from 'pinia'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+import router from '@/router'
 const app = createApp(App)
 
-components.forEach(component => {
-  app.component(component.name, component)
-})
+app
+    .use(router)
+    .use(VueAxios, axios)
+    .use(createPinia())
+
+
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBoFj1JhcaHurQbCfTUwiqAGMuSdqhisbI',
@@ -18,6 +25,7 @@ const firebaseConfig = {
   messagingSenderId: '812117439420',
   appId: '1:812117439420:web:3871cecb02ccca982df1b9'
 }
+
 
 initializeApp(firebaseConfig)
 

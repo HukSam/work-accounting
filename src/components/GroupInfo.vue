@@ -20,10 +20,10 @@
 </template>
 
 <script>
-import StudentForm from '@/components/StudentForm'
-import StudentList from '@/components/StudentList'
-import MyDialog from '@/components/UI/MyDialog'
-import MyButton from '@/components/UI/MyButton'
+import StudentForm from '@/components/StudentForm.vue'
+import StudentList from '@/components/StudentList.vue'
+import MyDialog from '@/components/UI/MyDialog.vue'
+import MyButton from '@/components/UI/MyButton.vue'
 
 export default {
   components: {

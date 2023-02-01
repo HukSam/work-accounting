@@ -9,30 +9,40 @@
     <my-dialog v-model:show="dialogVisible">
       <practice-list
         :practices="practices"
-
-      />
+      >
+        <practice-item
+          :practice="practice"
+        >
+          <button
+            @click="addStudentPractice()"
+          >
+            <img alt="see" src="../img/plus.png"/>
+          </button>
+        </practice-item>
+      </practice-list>
     </my-dialog>
     <practice-list
-      :studentPractises="studentPractises"
       :practices="studentPractices"
     />
   </div>
 </template>
 
 <script>
-import PracticeList from '@/components/PracticeList'
-import MyDialog from '@/components/UI/MyDialog'
-import MyButton from '@/components/UI/MyButton'
+import PracticeList from '@/components/PracticeList.vue'
+import PracticeItem from '@/components/PracticeItem.vue'
+import MyDialog from '@/components/UI/MyDialog.vue'
+import MyButton from '@/components/UI/MyButton.vue'
 
 export default {
   components: {
     PracticeList,
     MyDialog,
-    MyButton
+    MyButton,
+    PracticeItem
   },
   data() {
     return {
-      dialogVisible: false
+      dialogVisible: false,
     }
   },
   computed: {
@@ -45,16 +55,12 @@ export default {
       type: Array,
       required: true
       },
+    practice: {
+      type:Object,
+      required: true
+    },
     student: {
       type: Object,
-      required: true
-    },
-    studentPractises: {
-      type: Array,
-      required: true
-    },
-    studentInfoSearch: {
-      type: Boolean,
       required: true
     }
   },
@@ -65,6 +71,9 @@ export default {
   methods: {
     showDialog() {
       this.dialogVisible = true
+    },
+    addStudentPractice() {
+      this.$emit('add', this.practice)
     }
   }
 }

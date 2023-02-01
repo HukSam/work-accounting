@@ -20,8 +20,9 @@
 </template>
 
 <script>
-import MyInput from '@/components/UI/MyInput'
-import MyButton from '@/components/UI/MyButton'
+import MyInput from '@/components/UI/MyInput.vue'
+import MyButton from '@/components/UI/MyButton.vue'
+import { sendAnalyticsRequest } from '@/js/api'
 
 export default {
   components: {
@@ -50,10 +51,13 @@ export default {
         name: '',
         points: ''
       }
+
+      await sendAnalyticsRequest('addNewPractice')
+
       this.dialogVisible = false
     }
   },
-  rights: 'Студент'
+  rights: ''
 }
 </script>
 

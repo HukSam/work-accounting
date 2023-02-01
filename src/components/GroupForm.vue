@@ -21,8 +21,9 @@
 </template>
 
 <script>
-import MyInput from '@/components/UI/MyInput'
-import MyButton from '@/components/UI/MyButton'
+import MyInput from '@/components/UI/MyInput.vue'
+import MyButton from '@/components/UI/MyButton.vue'
+import { sendAnalyticsRequest } from '@/js/api'
 
 export default {
   components: {
@@ -51,6 +52,8 @@ export default {
         leadName: '',
         points: ''
       }
+
+      await sendAnalyticsRequest('addNewGroup')
       this.dialogVisible = false
     }
   }

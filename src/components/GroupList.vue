@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import GroupItem from '@/components/GroupItem'
+import GroupItem from '@/components/GroupItem.vue'
 
 export default {
   components: {

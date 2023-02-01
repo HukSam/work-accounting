@@ -25,7 +25,8 @@
       </div>
       <div>
         <button
-          @click="$emit('remove', student)"
+          @click="removeStudent()"
+
         >
           <img alt="see" src="../img/close.png"/>
         </button>
@@ -35,8 +36,9 @@
 </template>
 
 <script>
-import MyDialog from '@/components/UI/MyDialog'
-import StudentInfo from '@/components/StudentInfo'
+import MyDialog from '@/components/UI/MyDialog.vue'
+import StudentInfo from '@/components/StudentInfo.vue'
+import { sendAnalyticsRequest } from '@/js/api'
 
 export default {
   components: {
@@ -66,6 +68,10 @@ export default {
   methods: {
     showStudentInfo() {
       this.studentInfo = true
+    },
+    async removeStudent(student) {
+      this.$emit('remove', student)
+      await sendAnalyticsRequest('deleteStudent')
     }
   }
 }

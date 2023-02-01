@@ -25,8 +25,11 @@
 </template>
 
 <script>
-import MyInput from '@/components/UI/MyInput'
-import MyButton from '@/components/UI/MyButton'
+import MyInput from '@/components/UI/MyInput.vue'
+import MyButton from '@/components/UI/MyButton.vue'
+import { arrayUnion, doc, onSnapshot, updateDoc } from 'firebase/firestore'
+import { db } from '@/main'
+import { sendAnalyticsRequest } from '@/js/api'
 
 export default {
   components: {
@@ -44,14 +47,18 @@ export default {
     }
   },
   methods: {
-    createUser() {
+    async createUser() {
       this.student.id = Date.now()
       this.$emit('create', this.student)
       this.student = {
         name: '',
         points: ''
       }
-    }
+
+      await sendAnalyticsRequest('addNewStudent')
+      this.dialogVisible = false
+    },
+
   }
 }
 </script>

@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import StudentItem from '@/components/StudentItem'
+import StudentItem from '@/components/StudentItem.vue'
 
 export default {
   components: {

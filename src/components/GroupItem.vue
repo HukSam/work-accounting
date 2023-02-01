@@ -20,19 +20,19 @@
 
       <div>
         <button
-          @click="$emit('remove', group)"
+          @click="removeGroup()"
         >
           <img alt="see" src="../img/close.png"/>
         </button>
       </div>
     </div>
-
   </div>
 </template>
 
 <script>
-import GroupInfo from '@/components/GroupInfo'
-import MyDialog from '@/components/UI/MyDialog'
+import GroupInfo from '@/components/GroupInfo.vue'
+import MyDialog from '@/components/UI/MyDialog.vue'
+import { sendAnalyticsRequest } from '@/js/api'
 
 export default {
   components: {
@@ -59,6 +59,10 @@ export default {
   methods: {
     showGroupInfo() {
       this.groupInfo = true
+    },
+    async removeGroup(group) {
+      this.$emit('remove', group)
+      await sendAnalyticsRequest('deleteGroup')
     }
   }
 }

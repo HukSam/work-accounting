@@ -1,14 +1,15 @@
 <template>
-  <router-view/>
+  <form action="">
+
+  </form>
 </template>
 
 <script>
-
 export default {
-  name: 'app-main'
+
 }
 </script>
 
-<style>
+<style scoped>
 
 </style>

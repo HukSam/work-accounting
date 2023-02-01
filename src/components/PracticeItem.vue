@@ -10,19 +10,16 @@
         <button id="done-btn"
                 @click="confirmPoints"
         >
-          <img alt="see" src="../img/doneEditStudent.png"/>
+          <img alt="OK" src="../img/doneEditStudent.png"/>
         </button>
-        <button id="edit-btn"
-                @click="editPoints"
-        >
-          <img alt="see" src="../img/edit.png"/>
-        </button>
+        <slot>
+        </slot>
       </div>
       <div>
         <button
           @click="removePractice()"
         >
-          <img alt="see" src="../img/close.png"/>
+          <img alt="X" src="../img/close.png"/>
         </button>
       </div>
     </div>
@@ -30,7 +27,8 @@
 </template>
 
 <script>
-// import MyDialog from '@/components/UI/MyDialog'
+
+import { sendAnalyticsRequest } from '@/js/api'
 
 export default {
   components: {
@@ -48,12 +46,6 @@ export default {
     }
   },
   methods: {
-    editPoints() {
-      document.getElementById('result').style.display = 'inline'
-      document.getElementById('result').type = 'text'
-      document.getElementById('done-btn').style.display = 'inline'
-      document.getElementById('edit-btn').style.display = 'none'
-    },
     confirmPoints(practice) {
       document.getElementById('edit-btn').style.display = 'inline'
       document.getElementById('done-btn').style.display = 'none'
@@ -63,6 +55,7 @@ export default {
     },
     async removePractice(practice) {
       this.$emit('remove', practice)
+      await sendAnalyticsRequest('deletePractice')
     }
   }
 }
