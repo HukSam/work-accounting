@@ -5,7 +5,12 @@
     <div v-if="errors.length" class="errorsInfo">
       <b>Пожалуйста исправьте указанные ошибки:</b>
       <ul>
-        <li v-for="error in errors">{{ error }}</li>
+        <li
+          v-for="error in errors"
+          :key="error"
+        >
+          {{ error }}
+        </li>
       </ul>
     </div>
     <div class="headerReg">
@@ -32,7 +37,9 @@
       <option value="leader">Лидер</option>
     </select>
 
-    <button type="submit">Зарегистрироваться</button>
+    <button type="submit"
+            @click="regNotice"
+    >Зарегистрироваться</button>
   </form>
 </template>
 
@@ -42,11 +49,16 @@ import MyInput from '@/components/UI/MyInput.vue'
 import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth'
 import { doc, setDoc } from 'firebase/firestore'
 import { db } from '@/main'
+import { checkOfRegistration } from '@/stores/checkOfRegistration'
 
 export default {
   components: {
     MyInput
   },
+  setup: () => ({
+    userStore: checkOfRegistration(),
+
+  }),
   name: 'registration-form',
   data() {
     return {
@@ -61,10 +73,10 @@ export default {
       dialogVisible: false
     }
   },
-  mounted() {
-
-  },
   methods: {
+    async regNotice() {
+      this.$emit('showUserEmail')
+    },
     async register() {
       if (this.user.password === this.user.repeatedPassword) {
         /*this.user.id = Date.now()
@@ -87,10 +99,8 @@ export default {
               password: this.user.password,
               rights: this.user.rights
             })
-
-            localStorage.uid = user.uid
+            this.userStore.setUid(user.uid)
             this.$emit('hide')
-            this.$emit('showUserEmail')
             console.log(this.user.email)
           },
           (err) => {

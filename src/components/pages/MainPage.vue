@@ -28,15 +28,19 @@
           </div>
         </div>
         <div class="item auth">
+          <div
+            v-if="userStore.isLogged"
+          >
+            <span>
+              {{this.user.email}}
+            </span>
+          </div>
           <my-button
             @click="showUserAuth"
+            v-else
           >
             <span class="authOrReg">
               ВХОД / РЕГИСТРАЦИЯ
-            </span>
-            <span class="showUserEmail"
-                  @showUserEmail="showCurrentUser">
-              {{ this.user.email }}
             </span>
             <img src="@/img/sign-in.png" alt="signIn"/>
           </my-button>
@@ -130,6 +134,7 @@ import RegistrationForm from '@/components/UI/User/RegistrationForm.vue'
 import { arrayUnion, doc, onSnapshot, updateDoc } from 'firebase/firestore'
 import { db } from '@/main'
 import GroupList from '@/components/GroupList.vue'
+import { checkOfRegistration } from '@/stores/checkOfRegistration'
 
 export default {
   components: {
@@ -144,6 +149,9 @@ export default {
     PracticeList,
     RegistrationForm
   },
+  setup: () => ({
+    userStore: checkOfRegistration(),
+  }),
   data() {
     return {
       uid: '',
@@ -157,7 +165,6 @@ export default {
       dialogVisibleGroups: false,
       dialogVisiblePractices: false,
       dialogVisibleStudents: false,
-      showUserEmail: false,
       authVisible: false,
       studentInfoSearch: false,
       groupIndex: 0,
@@ -277,13 +284,6 @@ export default {
     },
     regHide() {
       this.authVisible = false
-    },
-    showCurrentUser() {
-      this.showUserEmail = true
-      document.querySelector('.showUserEmail').style.display = 'block'
-      console.log('set block')
-      document.querySelector('.authOrReg').style.display = 'none'
-      console.log('set none')
     }
   }
 }

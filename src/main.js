@@ -14,8 +14,6 @@ app
     .use(VueAxios, axios)
     .use(createPinia())
 
-
-
 const firebaseConfig = {
   apiKey: 'AIzaSyBoFj1JhcaHurQbCfTUwiqAGMuSdqhisbI',
   authDomain: 'online-score-accounting.firebaseapp.com',
