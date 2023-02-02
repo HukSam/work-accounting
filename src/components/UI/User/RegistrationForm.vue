@@ -84,6 +84,7 @@ export default {
 
             await setDoc(doc(db, 'users', user.uid), {
               email: this.user.email,
+              password: this.user.password,
               rights: this.user.rights
             })
 
@@ -93,7 +94,8 @@ export default {
           },
           (err) => {
             alert(err)
-          }
+          },
+        this.$emit('showUserEmail')
         )
       } else {
         alert('Пароли не совпадают!')

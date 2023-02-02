@@ -31,8 +31,12 @@
           <my-button
             @click="showUserAuth"
           >
-            <span>
+            <span class="authOrReg">
               ВХОД / РЕГИСТРАЦИЯ
+            </span>
+            <span class="showUserEmail"
+                  @showUserEmail="showCurrentUser">
+              {{ this.user.email }}
             </span>
             <img src="@/img/sign-in.png" alt="signIn"/>
           </my-button>
@@ -153,6 +157,7 @@ export default {
       dialogVisibleGroups: false,
       dialogVisiblePractices: false,
       dialogVisibleStudents: false,
+      showUserEmail: false,
       authVisible: false,
       studentInfoSearch: false,
       groupIndex: 0,
@@ -272,6 +277,13 @@ export default {
     },
     regHide() {
       this.authVisible = false
+    },
+    showCurrentUser() {
+      this.showUserEmail = true
+      document.querySelector('.showUserEmail').style.display = 'block'
+      console.log('set block')
+      document.querySelector('.authOrReg').style.display = 'none'
+      console.log('set none')
     }
   }
 }
@@ -409,6 +421,10 @@ html, body {
   position: absolute;
   background: white;
   cursor: pointer;
+}
+
+.showUserEmail {
+  display: none;
 }
 
 @media (max-width: 1310px) {
