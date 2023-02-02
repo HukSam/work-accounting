@@ -90,12 +90,12 @@ export default {
 
             localStorage.uid = user.uid
             this.$emit('hide')
+            this.$emit('showUserEmail')
             console.log(this.user.email)
           },
           (err) => {
             alert(err)
           },
-        this.$emit('showUserEmail')
         )
       } else {
         alert('Пароли не совпадают!')
