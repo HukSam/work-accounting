@@ -7,7 +7,9 @@
     >
       Добавить студента
     </my-button>
-    <my-dialog v-model:show="dialogVisible">
+    <my-dialog 
+    :show="dialogVisible"
+    >
       <student-form
         @create="createStudent"
       />
@@ -36,7 +38,7 @@ export default {
     return {
       students:
         [],
-      dialogVisible: false
+      //dialogVisible: false
     }
   },
   props: {
@@ -51,9 +53,6 @@ export default {
   },
   name: 'group-info',
   methods: {
-    showDialog() {
-      this.dialogVisible = true
-    }
   }
 }
 </script>

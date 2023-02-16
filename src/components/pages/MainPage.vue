@@ -29,12 +29,27 @@
         </div>
         <div class="item auth">
           <div
+            class="userLoggedwrapper"
             v-if="userStore.isLogged"
+            
           >
-            <span>
-              {{this.user.email}}
-            </span>
+            <button
+            @click="showAccountVisible"
+            >
+              <img alt="account" src="@/img/account.png" class="accountImg">
+            </button>
+            <my-dialog
+            :show="accountVisible"
+            @click="hideAccountVisible"
+            >
+            <accout-info
+            @account-sing-out="userSignOut"
+            >
+
+            </accout-info>
+            </my-dialog>
           </div>
+          
           <my-button
             @click="showUserAuth"
             v-else
@@ -44,7 +59,10 @@
             </span>
             <img src="@/img/sign-in.png" alt="signIn"/>
           </my-button>
-          <my-dialog :show="authVisible">
+          <my-dialog 
+          :show="authVisible"
+          @click="regHide"
+          >
             <registration-form
               @hide="regHide"
             />
@@ -57,11 +75,15 @@
           <div class="info-panel-content block-add-group">
             <h1>Команды</h1>
             <my-button
-              class="create-group-btn" @click="showDialogGroups"
+              class="create-group-btn" 
+              @click="showDialogGroups"
             >
               Добавить команду
             </my-button>
-            <my-dialog v-model:show="dialogVisibleGroups">
+            <my-dialog 
+            :show="dialogVisibleGroups"
+            @click="hideDialogGroups"
+            >
               <group-form
                 :rights="user.rights"
                 @create="createGroup"
@@ -75,11 +97,15 @@
           <div class="info-panel-content block-add-practice">
             <h1>Практики</h1>
             <my-button
-              class="create-practice-btn" @click="showDialogPractices"
+              class="create-practice-btn" 
+              @click="showDialogPractices"
             >
               Добавить практику
             </my-button>
-            <my-dialog v-model:show="dialogVisiblePractices">
+            <my-dialog 
+            :show="dialogVisiblePractices"
+            @click="hideDialogPractices"
+            >
               <practice-form
                 :rights="user.rights"
                 @create="createPractice"
@@ -95,11 +121,15 @@
           <div class="info-panel-content block-add-student">
             <h1>Студенты</h1>
             <my-button
-              class="create-student-btn" @click="showDialogStudents"
+              class="create-student-btn" 
+              @click="showDialogStudents"
             >
               Добавить студента
             </my-button>
-            <my-dialog v-model:show="dialogVisibleStudents">
+            <my-dialog 
+            :show="dialogVisibleStudents"
+            @click="hideDialogStudents"
+            >
               <student-form
                 :rights="user.rights"
                 @create="createStudent"
@@ -135,6 +165,9 @@ import { arrayUnion, doc, onSnapshot, updateDoc } from 'firebase/firestore'
 import { db } from '@/main'
 import GroupList from '@/components/GroupList.vue'
 import { checkOfRegistration } from '@/stores/checkOfRegistration'
+import AccoutInfo from '@/components/AccoutInfo.vue'
+import { getAuth, signOut } from 'firebase/auth'
+import { FirebaseError } from '@firebase/util'
 
 export default {
   components: {
@@ -147,7 +180,8 @@ export default {
     MyInput,
     PracticeForm,
     PracticeList,
-    RegistrationForm
+    RegistrationForm,
+    AccoutInfo
   },
   setup: () => ({
     userStore: checkOfRegistration(),
@@ -166,6 +200,7 @@ export default {
       dialogVisiblePractices: false,
       dialogVisibleStudents: false,
       authVisible: false,
+      accountVisible: false,
       studentInfoSearch: false,
       groupIndex: 0,
       studentIndex: 0
@@ -182,7 +217,6 @@ export default {
     loadData() {
       if (localStorage.uid) {
         this.uid = localStorage.uid
-
         onSnapshot(
           doc(db, 'users', this.uid),
           (data) => {
@@ -270,6 +304,10 @@ export default {
         }
       })
     },
+    userSignOut() {
+      localStorage.uid.clear()
+      this.uid = localStorage.uid
+    },
     showDialogGroups() {
       this.dialogVisibleGroups = true
     },
@@ -281,6 +319,24 @@ export default {
     },
     showUserAuth() {
       this.authVisible = true
+    },
+    showAccountVisible() {
+      this.accountVisible = true
+    },
+    hideDialogGroups() {
+      this.dialogVisibleGroups = false
+    },
+    hideDialogPractices() {
+      this.dialogVisiblePractices = false
+    },
+    hideDialogStudents() {
+      this.dialogVisibleStudents = false
+    },
+    hideUserAuth() {
+      this.authVisible = false
+    },
+    hideAccountVisible() {
+      this.accountVisible = false
     },
     regHide() {
       this.authVisible = false
@@ -423,8 +479,24 @@ html, body {
   cursor: pointer;
 }
 
-.showUserEmail {
-  display: none;
+.userLoggedwrapper button {
+  font-size: 18px;
+  color:black;
+  font-weight: bold;
+  background: none;
+  border:none;
+  padding: 0;
+  margin-top: 15px;
+  min-height: 40px;
+  min-width: 40px;
+}
+
+.accountImg {
+  width: 40px;
+}
+
+.accountImg:hover {
+  cursor: pointer;
 }
 
 @media (max-width: 1310px) {

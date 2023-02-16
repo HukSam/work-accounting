@@ -145,23 +145,8 @@ list-style-type: none;
   grid-template-columns: 10fr 1fr;
 }
 
-.choice-radio {
-  margin: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: left;
-}
-
 span {
   font-size: 14px;
 }
 
-.alertGuest {
-  position: fixed; /* or absolute */
-  top: 50%;
-  left: 50%;
-  width: 200px;
-  height:100px;
-  transform: translate(-50%, -50%);
-}
 </style>
