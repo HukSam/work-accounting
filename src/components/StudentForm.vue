@@ -27,9 +27,7 @@
 <script>
 import MyInput from '@/components/UI/MyInput.vue'
 import MyButton from '@/components/UI/MyButton.vue'
-import { arrayUnion, doc, onSnapshot, updateDoc } from 'firebase/firestore'
-import { db } from '@/main'
-import { sendAnalyticsRequest } from '@/js/api'
+
 
 export default {
   components: {
@@ -55,7 +53,6 @@ export default {
         points: ''
       }
 
-      await sendAnalyticsRequest('addNewStudent')
       this.dialogVisible = false
     },
 
@@ -67,6 +64,7 @@ export default {
 form {
   display: flex;
   flex-direction: column;
+
   font-size: 30px;
 }
 
@@ -75,7 +73,7 @@ h4 {
 }
 
 img {
-  max-width: 25px;
   min-width: 25px;
+  max-width: 25px;
 }
 </style>

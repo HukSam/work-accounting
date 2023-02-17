@@ -15,36 +15,38 @@
     </div>
     <h4 class="regauth signUp">Регистрация</h4>
     <my-input
-      v-model="user.email"
+      v-model.trim="user.email"
       placeholder="Email:"
       type="text"
     />
     <my-input
-      v-model="user.password"
+      v-model.trim="user.password"
       placeholder="Пароль:"
       type="password"
     />
+
     <my-input
-      v-model="user.repeatedPassword"
-      placeholder="Подтверждение пароля:"
+      v-model.trim="user.repeatedPassword"
       class="signUp"
+      placeholder="Подтверждение пароля:"
       type="password"
     />
-    <select 
-      id="rights" 
-      v-model="user.rights" 
-      name="rights"
+    <select
+      id="rights"
+      v-model="user.rights"
       class="signUp"
-      >
+      name="rights"
+    >
       Выберите роль
       <option selected value="student">Студент</option>
       <option value="leader">Лидер</option>
     </select>
 
-    <button 
-      type="submit"
+    <button
       class="submit-btn"
-    >Зарегистрироваться</button>
+      type="submit"
+    >Зарегистрироваться
+    </button>
   </form>
 </template>
 
@@ -62,7 +64,6 @@ export default {
   },
   setup: () => ({
     userStore: checkOfRegistration(),
-
   }),
   name: 'registration-form',
   data() {
@@ -101,6 +102,7 @@ export default {
               password: this.user.password,
               rights: this.user.rights
             })
+
             this.userStore.setUid(user.uid)
             this.$emit('hide')
             console.log(this.user.email)
@@ -112,6 +114,7 @@ export default {
       } else {
         alert('Пароли не совпадают!')
       }
+
       if (this.user.email === '') {
         this.errors.push('Введите почту!')
       }
@@ -123,36 +126,36 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 form {
   display: flex;
   flex-direction: column;
   font-size: 30px;
-}
 
-p {
-  font-size: 12px;
-  display: block; 
-}
+  p {
+    font-size: 12px;
+    display: block;
+  }
 
-h4 {
-  color:#80002f;
-  cursor: pointer;
-}
+  h4 {
+    color: #80002f;
+    cursor: pointer;
+  }
 
-ul {
-list-style-type: none;
-}
+  ul {
+    list-style-type: none;
+  }
 
-.errorsInfo {
-  max-width: 200px;
-}
+  .errorsInfo {
+    max-width: 200px;
+  }
 
-.submit-btn {
-  margin-top: 20px;
-}
-span {
-  font-size: 14px;
-}
+  .submit-btn {
+    margin-top: 20px;
+  }
 
+  span {
+    font-size: 14px;
+  }
+}
 </style>

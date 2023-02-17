@@ -4,8 +4,8 @@
     <student-item
       v-for="student in students"
       :key="student.id"
-      :student="student"
       :practices="practices"
+      :student="student"
       @remove="$emit('remove',student)"
     />
   </div>
@@ -13,6 +13,7 @@
     Список студентов пуст
   </h2>
 </template>
+
 
 <script>
 import StudentItem from '@/components/StudentItem.vue'
@@ -34,7 +35,4 @@ export default {
 }
 </script>
 
--
-<style scoped>
-
-</style>
+<style scoped></style>

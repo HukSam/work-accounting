@@ -7,13 +7,14 @@
     >
       Добавить студента
     </my-button>
-    <my-dialog 
-    :show="dialogVisible"
+    <my-dialog
+      :show="dialogVisible"
     >
       <student-form
         @create="createStudent"
       />
     </my-dialog>
+
     <student-list
       :students="students"
       @remove="removeStudent"
@@ -52,8 +53,7 @@ export default {
     }
   },
   name: 'group-info',
-  methods: {
-  }
+  methods: {}
 }
 </script>
 
@@ -61,12 +61,13 @@ export default {
 form {
   display: flex;
   flex-direction: column;
+
   font-size: 30px;
 }
 
 img {
-  max-width: 25px;
   min-width: 25px;
+  max-width: 25px;
 }
 
 .wrapper-student-info-add {
@@ -75,8 +76,8 @@ img {
 
 .btn-add-student {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 
 </style>

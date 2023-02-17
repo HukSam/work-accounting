@@ -23,7 +23,7 @@
 <script>
 import MyInput from '@/components/UI/MyInput.vue'
 import MyButton from '@/components/UI/MyButton.vue'
-import { sendAnalyticsRequest } from '@/js/api'
+
 
 export default {
   components: {
@@ -53,7 +53,6 @@ export default {
         points: ''
       }
 
-      await sendAnalyticsRequest('addNewGroup')
       this.dialogVisible = false
     }
   }
@@ -64,6 +63,7 @@ export default {
 form {
   display: flex;
   flex-direction: column;
+
   font-size: 30px;
 }
 

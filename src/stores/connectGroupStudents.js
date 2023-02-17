@@ -2,18 +2,8 @@ import { defineStore } from 'pinia'
 
 export const connectGroupStudents = defineStore('auth', {
   state: () => {
-    return {
-      student: student
-    }
+    return {}
   },
-  getters: {
-    isLogged(){
-      return this.student
-    }
-  },
-  actions: {
-    selectStudent(stundet) {
-      this.student = student
-    },
-  },
+  getters: {},
+  actions: {},
 })

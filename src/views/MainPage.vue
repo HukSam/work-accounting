@@ -3,12 +3,14 @@
     <div class="wrapper">
       <div class="nav-menu">
         <div class="item group"><h2>ГРУППА: О-20-ПРИ</h2></div>
+
         <div class="item mode"><h2>РЕЖИМ:</h2></div>
+
         <div class="search-input">
           <my-input
-            type="search"
             v-model="searchingStudent"
             aria-autocomplete="none"
+            type="search"
             @input="searchedStudents"
           />
           <div
@@ -22,85 +24,88 @@
                 @click="setStudent(filteredStudent)"
 
               >
-                {{filteredStudent.name}}
+                {{ filteredStudent.name }}
               </li>
             </ul>
           </div>
         </div>
+
         <div class="item auth">
           <div
-            class="userLoggedwrapper"
             v-if="userStore.isLogged"
+            class="userLoggedwrapper"
           >
             <button
-            @click="showAccountVisible"
+              @click="showAccountVisible"
             >
-              <img alt="account" src="@/img/account.png" class="accountImg">
+              <img alt="account" class="accountImg" src="@/assets/img/account.png"/>
             </button>
-            <my-dialog
-            :show="accountVisible"
-            @click="hideAccountVisible"
-            >
-              <accout-info
-              @accountSignOut="userSignOut"
-              >
-              </accout-info>
-            </my-dialog>
-          </div >
-          <div v-else
-          class="anonUserWrapper"
-          >
 
-          
+            <my-dialog
+              :show="accountVisible"
+              @click="hideAccountVisible"
+            >
+              <account-info
+                @accountSignOut="userSignOut"
+              />
+            </my-dialog>
+          </div>
+
+          <div v-else
+               class="anonUserWrapper"
+          >
             <my-button
               @click="showUserSignIn"
             >
               <span class="authOrReg">
                 ВХОД
               </span>
-              <img src="@/img/sign-in.png" alt="signIn"/>
+              <img alt="signIn" src="@/assets/img/sign-in.png"/>
             </my-button>
-            <my-dialog 
+
+            <my-dialog
               :show="signInVisible"
               @click="SingInHide"
             >
-                <sign-in-form
-                  @hide="SingInHide"
-                />
+              <sign-in-form
+                @hide="SingInHide"
+              />
             </my-dialog>
+
             <my-button
               @click="showUserAuth"
             >
               <span class="authOrReg">
-              РЕГИСТРАЦИЯ
+                РЕГИСТРАЦИЯ
               </span>
-              <img src="@/img/sign-in.png" alt="signIn"/>
+              <img alt="signIn" src="@/assets/img/sign-in.png"/>
             </my-button>
-            <my-dialog 
+            <my-dialog
               :show="authVisible"
               @click="regHide"
             >
-                <registration-form
-                  @hide="regHide"
-                />
+              <registration-form
+                @hide="regHide"
+              />
             </my-dialog>
           </div>
         </div>
       </div>
+
       <div class="mainBody">
         <div class="item teacher"><h2>Преподаватель: Коптенок Е.В.</h2></div>
         <div class="item info-panel">
           <div class="info-panel-content block-add-group">
             <h1>Команды</h1>
             <my-button
-              class="create-group-btn" 
+              class="create-group-btn"
               @click="showDialogGroups"
             >
               Добавить команду
             </my-button>
-            <my-dialog 
-            :show="dialogVisibleGroups"
-            @click="hideDialogGroups"
+            <my-dialog
+              :show="dialogVisibleGroups"
+              @click="hideDialogGroups"
             >
               <group-form
                 :rights="user.rights"
@@ -115,14 +120,14 @@
           <div class="info-panel-content block-add-practice">
             <h1>Практики</h1>
             <my-button
-              class="create-practice-btn" 
+              class="create-practice-btn"
               @click="showDialogPractices"
             >
               Добавить практику
             </my-button>
-            <my-dialog 
-            :show="dialogVisiblePractices"
-            @click="hideDialogPractices"
+            <my-dialog
+              :show="dialogVisiblePractices"
+              @click="hideDialogPractices"
             >
               <practice-form
                 :rights="user.rights"
@@ -139,14 +144,14 @@
           <div class="info-panel-content block-add-student">
             <h1>Студенты</h1>
             <my-button
-              class="create-student-btn" 
+              class="create-student-btn"
               @click="showDialogStudents"
             >
               Добавить студента
             </my-button>
-            <my-dialog 
-            :show="dialogVisibleStudents"
-            @click="hideDialogStudents"
+            <my-dialog
+              :show="dialogVisibleStudents"
+              @click="hideDialogStudents"
             >
               <student-form
                 :rights="user.rights"
@@ -155,11 +160,11 @@
             </my-dialog>
             <div class="wrapper-groups">
               <student-list
-                :studentInfoSearch="studentInfoSearch"
                 :groups="groups"
-                :rights="user.rights"
-                :students="students"
                 :practices="practices"
+                :rights="user.rights"
+                :studentInfoSearch="studentInfoSearch"
+                :students="students"
                 @remove="removeStudent"/>
             </div>
           </div>
@@ -183,8 +188,8 @@ import { arrayUnion, doc, onSnapshot, updateDoc } from 'firebase/firestore'
 import { db } from '@/main'
 import GroupList from '@/components/GroupList.vue'
 import { checkOfRegistration } from '@/stores/checkOfRegistration'
-import AccoutInfo from '@/components/AccoutInfo.vue'
-import SignInForm from '../UI/User/SignIn.vue'
+import AccountInfo from '@/components/AccountInfo.vue'
+import SignInForm from '../components/UI/User/SignIn.vue'
 
 export default {
   components: {
@@ -198,19 +203,21 @@ export default {
     PracticeForm,
     PracticeList,
     RegistrationForm,
-    AccoutInfo,
+    AccountInfo,
     SignInForm
   },
+
   setup: () => ({
     userStore: checkOfRegistration(),
   }),
+
   data() {
     return {
       uid: '',
       user: {},
       groups: [],
       students: [],
-      searchQuery:'',
+      searchQuery: '',
       filteredStudents: [],
       searchingStudent: '',
       practices: [],
@@ -225,6 +232,7 @@ export default {
       studentIndex: 0
     }
   },
+
   mounted() {
     this.loadData()
     this.subscribePractice()
@@ -249,12 +257,12 @@ export default {
     showStudentInfoSearch() {
       this.studentInfoSearch = true
     },
-    filterStudents () {
+    filterStudents() {
       if (this.searchingStudent.length === 0) {
         this.filteredStudents = this.students
       }
     },
-    searchedStudents () {
+    searchedStudents() {
       this.filteredStudents = this.students.filter(searchingStudent => {
         return searchingStudent.name.toLowerCase().startsWith(this.searchingStudent.toLowerCase())
       })
@@ -277,7 +285,7 @@ export default {
       })
     },
     subscribeGroup() {
-      onSnapshot(doc(db, 'university', 'bstu'), (doc)=>{
+      onSnapshot(doc(db, 'university', 'bstu'), (doc) => {
         if (doc.exists()) {
           this.groups = doc.data().groups
         }
@@ -297,7 +305,7 @@ export default {
       })
     },
     subscribeStudent() {
-      onSnapshot(doc(db,'university', 'bstu'), (doc)=>{
+      onSnapshot(doc(db, 'university', 'bstu'), (doc) => {
         if (doc.exists()) {
           this.students = doc.data().students
         }
@@ -371,27 +379,32 @@ export default {
 </script>
 
 <style>
-*{
+* {
   box-sizing: border-box;
 }
+
 button {
   padding: 0;
 }
 
 html, body {
+  height: 100vh;
   margin: 0;
   padding: 0;
-  height: 100vh;
-  line-height: 1;
-  font-size: 14px;
-  background-color: whitesmoke;
+
   font-family: 'Montserrat', serif;
+  font-size: 14px;
+  line-height: 1;
+
+  background-color: whitesmoke;
 }
 
 .wrapper {
-  height: 100vh;
   display: grid;
+
   grid-template-rows: 1fr 7fr;
+
+  height: 100vh;
 }
 
 .wrapper h2 {
@@ -405,82 +418,95 @@ html, body {
 }
 
 .nav-menu {
-  padding: 10px;
   display: grid;
-  grid-template-columns: repeat(4 , 1fr);
+
   grid-gap: 10px;
+  grid-template-columns: repeat(4, 1fr);
+
+  padding: 10px;
+
   background: #dcdcdc;
 }
 
 .nav-menu input {
   max-width: 280px;
   max-height: 40px;
+
   border: none;
 }
 
 .anonUserWrapper {
   display: grid;
+
   grid-template-columns: 1fr 1fr;
 }
 
 .mainBody {
   display: grid;
+
   grid-template-rows: 1fr 6fr;
 }
 
 .mainBody .info-panel {
   display: grid;
+
   grid-template-columns: 1fr 1fr 1fr;
 }
 
 .nav-menu .auth .btn {
-  background: #dcdcdc;
-  color:  black;
-  font-weight: bold;
   font-size: 12px;
+  font-weight: bold;
+  color: black;
+
+  background: #dcdcdc;
 }
 
-.nav-menu .auth .btn img{
+.nav-menu .auth .btn img {
   display: none;
 }
 
-.nav-menu .auth{
+.nav-menu .auth {
   display: grid;
+
   grid-template-columns: 1fr 1fr;
-  margin-left: 200px;
+
   max-width: 300px;
+  margin-left: 200px;
 }
 
 .mainBody .info-panel .item * {
   max-height: 35px;
+
   border: 2px solid red;
 }
 
 .mainBody .teacher {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+
   width: 100%;
   height: 100%;
-  display: flex;
-  align-items: center;
-  align-content: center;
-  justify-content: center;
   overflow: auto;
 }
 
 .info-panel h1 {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+}
+
+.info-panel-content {
+  margin-bottom: 20px;
+  overflow: hidden;
+
+  border: 1px solid darkgrey;
+  border-radius: 20px;
 }
 
 .info-panel .info-panel-content {
   padding: 10px;
-}
-
-.info-panel-content {
-  border: 1px solid darkgrey;
-  border-radius: 20px;
-  margin-bottom: 20px;
-  overflow: hidden;
 }
 
 .info-panel > :hover {
@@ -493,18 +519,20 @@ html, body {
 .create-practice-btn,
 .create-student-btn {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 
 .search-input {
   position: relative;
+
   max-width: 200px;
 }
 
 .search-input li {
-  list-style-type: none;
   padding: 5px;
+
+  list-style-type: none;
 }
 
 .search-input ul {
@@ -512,22 +540,27 @@ html, body {
 }
 
 .search-input div {
-  width: 200px;
   position: absolute;
+
+  width: 200px;
+
   background: white;
+
   cursor: pointer;
 }
 
 .userLoggedwrapper button {
-  font-size: 18px;
-  color:black;
-  font-weight: bold;
-  background: none;
-  border:none;
-  padding: 0;
-  margin-top: 15px;
-  min-height: 40px;
   min-width: 40px;
+  min-height: 40px;
+  margin-top: 15px;
+  padding: 0;
+
+  font-size: 18px;
+  font-weight: bold;
+  color: black;
+
+  background: none;
+  border: none;
 }
 
 .accountImg {
@@ -544,73 +577,76 @@ html, body {
     grid-template-rows: auto auto auto;
   }
 }
+
 @media (max-width: 970px) {
   .mainBody .info-panel {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto;
   }
-  .nav-menu .auth{
-    margin-left: 0;
+
+  .nav-menu .auth {
     max-width: 300px;
+    margin-left: 0;
   }
 }
 
 @media (max-width: 625px) {
-  .nav-menu .auth .btn img{
+  .nav-menu .auth .btn img {
     display: inline-block;
+
     max-height: 30px;
   }
-  .nav-menu .auth span{
+
+  .nav-menu .auth span {
     display: none;
   }
 
 }
 
-@media (max-width: 530px){
-  .nav-menu .auth .btn img{
+@media (max-width: 530px) {
+  .nav-menu .auth .btn img {
     display: inline-block;
+
     max-height: 30px;
   }
-  .nav-menu .auth .btn{
-    padding: 0 20px;
+
+  .nav-menu .auth .btn {
     margin: 0;
+    padding: 0 20px;
   }
+
   .nav-menu .auth {
     margin: auto;
   }
+
   .nav-menu {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: auto auto auto;
   }
 }
-@media (max-width:450px){
+
+@media (max-width: 450px) {
   .nav-menu .auth {
     max-width: 15%;
+    margin: auto;
   }
+
   .nav-menu {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto;
   }
+
   .nav-menu .group h2,
-  .nav-menu .mode h2
-  {
-    font-size: 18px;
+  .nav-menu .mode h2 {
     margin: 5px;
+
+    font-size: 18px;
   }
-  .nav-menu .auth span{
+
+  .nav-menu .auth span {
     display: none;
   }
-  .nav-menu .auth .btn img{
-    display: inline-block;
-    max-height: 30px;
-  }
-  .nav-menu .auth .btn{
-    padding: 0 20px;
-    margin: 0;
-  }
-  .nav-menu .auth {
-    margin: auto;
-  }
+
   .mainBody .info-panel {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto;

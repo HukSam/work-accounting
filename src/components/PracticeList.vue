@@ -1,19 +1,22 @@
 <template>
   <div v-if="practices.length > 0">
     <h3>Список практик</h3>
+
     <practice-item
       v-for="practice in practices"
       :key="practice.id"
       :practice="practice"
       @remove="$emit('remove',practice)"
     >
-      <button id="edit-btn"
-              @click="editPoints"
+      <button
+        id="edit-btn"
+        @click="editPoints"
       >
-        <img alt="edit" src="../img/edit.png"/>
+        <img alt="edit" src="../assets/img/edit.png"/>
       </button>
     </practice-item>
   </div>
+
   <h2 v-else style="color:#80002f">
     Список практик пуст
   </h2>
@@ -43,18 +46,20 @@ export default {
 }
 </script>
 
+
 <style scoped>
 button {
-  border-radius: 50px;
-  border: none;
   background: none;
+  border: none;
+  border-radius: 50px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
   cursor: pointer;
 }
 
 img {
-  padding: 5px;
-  max-width: 40px;
   min-width: 40px;
+  max-width: 40px;
+  padding: 5px;
 }
 </style>

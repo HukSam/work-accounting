@@ -10,7 +10,7 @@
         <button id="done-btn"
                 @click="confirmPoints"
         >
-          <img alt="OK" src="../img/doneEditStudent.png"/>
+          <img alt="OK" src="../assets/img/doneEditStudent.png"/>
         </button>
         <slot>
         </slot>
@@ -19,7 +19,7 @@
         <button
           @click="removePractice()"
         >
-          <img alt="X" src="../img/close.png"/>
+          <img alt="X" src="../assets/img/close.png"/>
         </button>
       </div>
     </div>
@@ -27,8 +27,6 @@
 </template>
 
 <script>
-
-import { sendAnalyticsRequest } from '@/js/api'
 
 export default {
   components: {
@@ -55,7 +53,6 @@ export default {
     },
     async removePractice(practice) {
       this.$emit('remove', practice)
-      await sendAnalyticsRequest('deletePractice')
     }
   }
 }
@@ -63,35 +60,43 @@ export default {
 
 <style scoped>
 
+
 .practice {
-  border: 2px solid #c0c0c0;
   display: grid;
+
   grid-template-columns:8fr 2fr;
+
   height: 50px;
+
+  border: 2px solid #c0c0c0;
 }
 
 .practice-data {
   display: grid;
+
   grid-template-columns: 4fr 2fr 1fr;
 }
 
 .practice-data * {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+
   max-height: 46px;
 }
 
 .practice-btns {
   display: grid;
+
   grid-template-columns: 1fr 1fr;
 }
 
 .strong {
-  border-right: 2px solid #c0c0c0;
   height: 100%;
   margin-left: 10px;
   padding-right: 10px;
+
+  border-right: 2px solid #c0c0c0;
 }
 
 .strong:nth-child(3n) {
@@ -99,10 +104,11 @@ export default {
 }
 
 button {
-  border-radius: 50px;
-  border: none;
   background: none;
+  border: none;
+  border-radius: 50px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
   cursor: pointer;
 }
 
@@ -115,8 +121,8 @@ button {
 }
 
 img {
-  padding: 5px;
-  max-width: 40px;
   min-width: 40px;
+  max-width: 40px;
+  padding: 5px;
 }
 </style>

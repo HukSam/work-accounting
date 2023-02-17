@@ -10,7 +10,7 @@
         <button
           @click="showStudentInfo"
         >
-          <img alt="edit" src="../img/edit.png"/>
+          <img alt="edit" src="../assets/img/edit.png"/>
         </button>
         <my-dialog
           v-model:show="studentInfo"
@@ -18,8 +18,8 @@
           <student-info
             :practices="practices"
             :student="student"
-            :studentPractises="studentPractises"
             :studentInfoSearch="studentInfoSearch"
+            :studentPractises="studentPractises"
           />
         </my-dialog>
       </div>
@@ -28,7 +28,7 @@
           @click="removeStudent()"
 
         >
-          <img alt="see" src="../img/close.png"/>
+          <img alt="see" src="../assets/img/close.png"/>
         </button>
       </div>
     </div>
@@ -38,7 +38,6 @@
 <script>
 import MyDialog from '@/components/UI/MyDialog.vue'
 import StudentInfo from '@/components/StudentInfo.vue'
-import { sendAnalyticsRequest } from '@/js/api'
 
 export default {
   components: {
@@ -71,7 +70,6 @@ export default {
     },
     async removeStudent(student) {
       this.$emit('remove', student)
-      await sendAnalyticsRequest('deleteStudent')
     }
   }
 }
@@ -80,32 +78,39 @@ export default {
 <style scoped>
 
 .group {
-  border: 2px solid #dcdcdc;
   display: grid;
+
   grid-template-columns:8fr 2fr;
+
   height: 50px;
+
+  border: 2px solid #dcdcdc;
 }
 
 .group-data {
   display: grid;
+
   grid-template-columns: 3fr 1fr 2fr;
 }
 
 .group-data * {
   display: flex;
-  align-items: center;
   justify-content: left;
+  align-items: center;
+
   max-height: 46px;
 }
 
 .group-btns {
   display: grid;
+
   grid-template-columns: 1fr 1fr;
 }
 
 .strong {
-  border-right: 2px solid #dcdcdc;
   height: 100%;
+
+  border-right: 2px solid #dcdcdc;
 }
 
 .strong:nth-child(3n) {
@@ -118,16 +123,17 @@ div strong {
 }
 
 button {
-  border-radius: 50px;
-  border: none;
   background: none;
+  border: none;
+  border-radius: 50px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
   cursor: pointer;
 }
 
 img {
-  padding: 5px;
-  max-width: 40px;
   min-width: 40px;
+  max-width: 40px;
+  padding: 5px;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button type="submit" class="btn">
+    <button class="btn" type="submit">
       <slot></slot>
     </button>
   </div>
@@ -16,11 +16,14 @@ export default {
 .btn {
   margin-top: 15px;
   padding: 10px 15px;
-  background: #80002f;
-  color: white;
-  border: 2px solid #80002f;
-  cursor: pointer;
-  border-radius: 5px;
+
   font-size: 14px;
+  color: white;
+
+  background: #80002f;
+  border: 2px solid #80002f;
+  border-radius: 5px;
+
+  cursor: pointer;
 }
 </style>

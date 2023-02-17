@@ -13,13 +13,13 @@
       placeholder="Пароль:"
       type="password"
     />
-    <button 
+    <button
       type="submit"
       class="submit-btn"
     >Войти</button>
   </form>
 </template>
-  
+
 <script>
 import MyInput from '@/components/UI/MyInput.vue'
 import {signInWithEmailAndPassword, getAuth } from 'firebase/auth'
@@ -50,7 +50,7 @@ export default {
             const user = userCredential.user
 
             this.userStore.setUid(user.uid)
-            console.log(this.user.email)            
+            console.log(this.user.email)
             //samorodsky101010@mail.ru
           },
           (err) => {
@@ -62,21 +62,24 @@ export default {
   }
 }
 </script>
-  
+
 <style scoped>
 form {
   display: flex;
   flex-direction: column;
+
   font-size: 30px;
 }
 
 p {
+  display: block;
+
   font-size: 12px;
-  display: block; 
 }
 
 h4 {
   color:#80002f;
+
   cursor: pointer;
 }
 
@@ -91,4 +94,3 @@ span {
 }
 
 </style>
-  

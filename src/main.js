@@ -2,17 +2,15 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import { getFirestore } from 'firebase/firestore'
 import { initializeApp } from 'firebase/app'
-import '@/css/main.scss'
+import '@/assets/css/main.scss'
 import { createPinia } from 'pinia'
-import axios from 'axios'
-import VueAxios from 'vue-axios'
 import router from '@/router'
+
 const app = createApp(App)
 
 app
-    .use(router)
-    .use(VueAxios, axios)
-    .use(createPinia())
+  .use(router)
+  .use(createPinia())
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBoFj1JhcaHurQbCfTUwiqAGMuSdqhisbI',

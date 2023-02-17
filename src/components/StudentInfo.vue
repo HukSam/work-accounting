@@ -16,7 +16,7 @@
           <button
             @click="addStudentPractice()"
           >
-            <img alt="see" src="../img/plus.png"/>
+            <img alt="see" src="../assets/img/plus.png"/>
           </button>
         </practice-item>
       </practice-list>
@@ -83,13 +83,15 @@ export default {
 form {
   display: flex;
   flex-direction: column;
-  font-size: 30px;
+
   min-width: 400px;
+
+  font-size: 30px;
 }
 
 img {
-  max-width: 25px;
   min-width: 25px;
+  max-width: 25px;
 }
 
 .wrapper-practice-info-add {
@@ -98,8 +100,8 @@ img {
 
 .wrapper-practice-info-add my-button {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 
 </style>

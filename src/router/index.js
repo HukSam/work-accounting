@@ -1,9 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import AnalyticPage from '@/components/pages/AnalyticPage.vue'
-import MainPage from '@/components/pages/MainPage.vue'
+
 const routes = [
-  { path: '/analytics', component: AnalyticPage },
-  { path: '/', component: MainPage }
+  {
+    path: '/',
+    name: 'Main',
+    component: () => import('@/views/MainPage.vue')
+  },
 ]
 
 const router = createRouter({

@@ -9,7 +9,7 @@
         <button
           @click="showGroupInfo"
         >
-          <img alt="see" src="../img/see.png"/>
+          <img alt="see" src="../assets/img/see.png"/>
         </button>
         <my-dialog
           v-model:show="groupInfo"
@@ -22,7 +22,7 @@
         <button
           @click="removeGroup()"
         >
-          <img alt="see" src="../img/close.png"/>
+          <img alt="see" src="../assets/img/close.png"/>
         </button>
       </div>
     </div>
@@ -32,7 +32,6 @@
 <script>
 import GroupInfo from '@/components/GroupInfo.vue'
 import MyDialog from '@/components/UI/MyDialog.vue'
-import { sendAnalyticsRequest } from '@/js/api'
 
 export default {
   components: {
@@ -62,7 +61,6 @@ export default {
     },
     async removeGroup(group) {
       this.$emit('remove', group)
-      await sendAnalyticsRequest('deleteGroup')
     }
   }
 }
@@ -71,32 +69,38 @@ export default {
 <style scoped>
 
 .group {
-  border: 2px solid #c0c0c0;
   display: grid;
+
   grid-template-columns:8fr 2fr;
+
   height: 50px;
+
+  border: 2px solid #c0c0c0;
 }
 
 .group-data {
   display: grid;
+
   grid-template-columns: 3fr 2fr;
 
 }
 
 .group-data * {
   display: flex;
-  align-items: center;
   justify-content: left;
+  align-items: center;
 }
 
 .group-btns {
   display: grid;
+
   grid-template-columns: 1fr 1fr;
 }
 
 .strong {
-  border-right: 2px solid #c0c0c0;
   height: 100%;
+
+  border-right: 2px solid #c0c0c0;
 }
 
 .strong:nth-child(3n) {
@@ -109,16 +113,17 @@ div strong {
 }
 
 button {
-  border-radius: 50px;
-  border: none;
   background: none;
+  border: none;
+  border-radius: 50px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
   cursor: pointer;
 }
 
 img {
-  max-width: 40px;
   min-width: 40px;
+  max-width: 40px;
 }
 
 @media (max-width: 390px) {
@@ -126,6 +131,7 @@ img {
     grid-template-columns: 2fr;
     grid-template-rows: auto;
   }
+
   .group-btns {
     grid-template-columns: 1fr;
     grid-template-rows: auto;
