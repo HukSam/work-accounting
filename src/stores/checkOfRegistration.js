@@ -16,5 +16,11 @@ export const checkOfRegistration = defineStore('auth', {
       this.uid = uid
       localStorage.uid = uid
     },
+    UserSignIn(email, password) {
+      email = this.email
+      localStorage.email = email
+      password = this.password
+      localStorage.password = password  
+    }
   },
 })

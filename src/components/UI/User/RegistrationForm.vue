@@ -13,9 +13,7 @@
         </li>
       </ul>
     </div>
-    <div class="headerReg">
-      <h4>Регистрация</h4>
-    </div>
+    <h4 class="regauth signUp">Регистрация</h4>
     <my-input
       v-model="user.email"
       placeholder="Email:"
@@ -29,16 +27,23 @@
     <my-input
       v-model="user.repeatedPassword"
       placeholder="Подтверждение пароля:"
+      class="signUp"
       type="password"
     />
-    <select id="rights" v-model="user.rights" name="rights">
+    <select 
+      id="rights" 
+      v-model="user.rights" 
+      name="rights"
+      class="signUp"
+      >
       Выберите роль
       <option selected value="student">Студент</option>
       <option value="leader">Лидер</option>
     </select>
 
-    <button type="submit"
-            @click="regNotice"
+    <button 
+      type="submit"
+      class="submit-btn"
     >Зарегистрироваться</button>
   </form>
 </template>
@@ -74,9 +79,6 @@ export default {
     }
   },
   methods: {
-    async regNotice() {
-      this.$emit('showUserEmail')
-    },
     async register() {
       if (this.user.password === this.user.repeatedPassword) {
         /*this.user.id = Date.now()
@@ -130,21 +132,25 @@ form {
 
 p {
   font-size: 12px;
-  display: block;
+  display: block; 
 }
+
+h4 {
+  color:#80002f;
+  cursor: pointer;
+}
+
 ul {
 list-style-type: none;
 }
 
 .errorsInfo {
-  max-width: 300px;
+  max-width: 200px;
 }
 
-.headerReg {
-  display: grid;
-  grid-template-columns: 10fr 1fr;
+.submit-btn {
+  margin-top: 20px;
 }
-
 span {
   font-size: 14px;
 }

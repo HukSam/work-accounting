@@ -31,7 +31,6 @@
           <div
             class="userLoggedwrapper"
             v-if="userStore.isLogged"
-            
           >
             <button
             @click="showAccountVisible"
@@ -42,31 +41,50 @@
             :show="accountVisible"
             @click="hideAccountVisible"
             >
-            <accout-info
-            @account-sing-out="userSignOut"
-            >
+              <accout-info
+              @accountSignOut="userSignOut"
+              >
+              </accout-info>
+            </my-dialog>
+          </div >
+          <div v-else
+          class="anonUserWrapper"
+          >
 
-            </accout-info>
+          
+            <my-button
+              @click="showUserSignIn"
+            >
+              <span class="authOrReg">
+                ВХОД
+              </span>
+              <img src="@/img/sign-in.png" alt="signIn"/>
+            </my-button>
+            <my-dialog 
+              :show="signInVisible"
+              @click="SingInHide"
+            >
+                <sign-in-form
+                  @hide="SingInHide"
+                />
+            </my-dialog>
+            <my-button
+              @click="showUserAuth"
+            >
+              <span class="authOrReg">
+              РЕГИСТРАЦИЯ
+              </span>
+              <img src="@/img/sign-in.png" alt="signIn"/>
+            </my-button>
+            <my-dialog 
+              :show="authVisible"
+              @click="regHide"
+            >
+                <registration-form
+                  @hide="regHide"
+                />
             </my-dialog>
           </div>
-          
-          <my-button
-            @click="showUserAuth"
-            v-else
-          >
-            <span class="authOrReg">
-              ВХОД / РЕГИСТРАЦИЯ
-            </span>
-            <img src="@/img/sign-in.png" alt="signIn"/>
-          </my-button>
-          <my-dialog 
-          :show="authVisible"
-          @click="regHide"
-          >
-            <registration-form
-              @hide="regHide"
-            />
-          </my-dialog>
         </div>
       </div>
       <div class="mainBody">
@@ -166,8 +184,7 @@ import { db } from '@/main'
 import GroupList from '@/components/GroupList.vue'
 import { checkOfRegistration } from '@/stores/checkOfRegistration'
 import AccoutInfo from '@/components/AccoutInfo.vue'
-import { getAuth, signOut } from 'firebase/auth'
-import { FirebaseError } from '@firebase/util'
+import SignInForm from '../UI/User/SignIn.vue'
 
 export default {
   components: {
@@ -181,7 +198,8 @@ export default {
     PracticeForm,
     PracticeList,
     RegistrationForm,
-    AccoutInfo
+    AccoutInfo,
+    SignInForm
   },
   setup: () => ({
     userStore: checkOfRegistration(),
@@ -201,6 +219,7 @@ export default {
       dialogVisibleStudents: false,
       authVisible: false,
       accountVisible: false,
+      signInVisible: false,
       studentInfoSearch: false,
       groupIndex: 0,
       studentIndex: 0
@@ -305,8 +324,8 @@ export default {
       })
     },
     userSignOut() {
-      localStorage.uid.clear()
-      this.uid = localStorage.uid
+      localStorage.clear()
+      this.userStore.$reset()
     },
     showDialogGroups() {
       this.dialogVisibleGroups = true
@@ -319,6 +338,9 @@ export default {
     },
     showUserAuth() {
       this.authVisible = true
+    },
+    showUserSignIn() {
+      this.signInVisible = true
     },
     showAccountVisible() {
       this.accountVisible = true
@@ -340,6 +362,9 @@ export default {
     },
     regHide() {
       this.authVisible = false
+    },
+    SingInHide() {
+      this.signInVisible = false
     }
   }
 }
@@ -382,7 +407,7 @@ html, body {
 .nav-menu {
   padding: 10px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4 , 1fr);
   grid-gap: 10px;
   background: #dcdcdc;
 }
@@ -393,6 +418,11 @@ html, body {
   border: none;
 }
 
+.anonUserWrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
 .mainBody {
   display: grid;
   grid-template-rows: 1fr 6fr;
@@ -400,7 +430,14 @@ html, body {
 
 .mainBody .info-panel {
   display: grid;
-  grid-template-columns: 3fr 3fr 3fr;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.nav-menu .auth .btn {
+  background: #dcdcdc;
+  color:  black;
+  font-weight: bold;
+  font-size: 12px;
 }
 
 .nav-menu .auth .btn img{
@@ -408,6 +445,8 @@ html, body {
 }
 
 .nav-menu .auth{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   margin-left: 200px;
   max-width: 300px;
 }
