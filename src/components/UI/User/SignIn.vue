@@ -48,10 +48,8 @@ export default {
       await signInWithEmailAndPassword(getAuth(), this.user.email, this.user.password).then(
           async (userCredential) => {
             const user = userCredential.user
-            
-            this.userStore.UserSignIn(user.email,user.password)
 
-            this.$emit('hide')
+            this.userStore.setUid(user.uid)
             console.log(this.user.email)            
             //samorodsky101010@mail.ru
           },
@@ -59,7 +57,7 @@ export default {
             alert(err)
           },
         )
-        this.$emit('hide')
+      this.$emit('hide')
     }
   }
 }
