@@ -1,0 +1,148 @@
+[debug] [2023-02-18T08:41:03.459Z] ----------------------------------------------------------------------
+[debug] [2023-02-18T08:41:03.460Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\samor\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js emulators:start
+[debug] [2023-02-18T08:41:03.461Z] CLI Version:   11.23.1
+[debug] [2023-02-18T08:41:03.461Z] Platform:      win32
+[debug] [2023-02-18T08:41:03.461Z] Node Version:  v16.15.1
+[debug] [2023-02-18T08:41:03.464Z] Time:          Sat Feb 18 2023 11:41:03 GMT+0300 (Москва, стандартное время)
+[debug] [2023-02-18T08:41:03.465Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-02-18T08:41:03.542Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-02-18T08:41:03.542Z] > authorizing via signed-in user (ibabyshka74@gmail.com)
+[debug] [2023-02-18T08:41:03.777Z] java version "19.0.2" 2023-01-17
+Java(TM) SE Runtime Environment (build 19.0.2+7-44)
+
+[debug] [2023-02-18T08:41:03.777Z] Java HotSpot(TM) 64-Bit Server VM (build 19.0.2+7-44, mixed mode, sharing)
+
+[debug] [2023-02-18T08:41:03.799Z] Parsed Java major version: 19
+[info] i  emulators: Starting emulators: database, hosting {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: database, hosting"}}
+[debug] [2023-02-18T08:41:03.811Z] [logging] Logging Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-02-18T08:41:03.811Z] [database] Database Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-02-18T08:41:03.811Z] [hosting] Hosting Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-02-18T08:41:03.812Z] assigned listening specs for emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"database":[{"address":"127.0.0.1","family":"IPv4","port":9000}],"hosting":[{"address":"127.0.0.1","family":"IPv4","port":5000}]},"metadata":{"message":"assigned listening specs for emulators"}}
+[debug] [2023-02-18T08:41:03.820Z] [hub] writing locator at C:\Users\samor\AppData\Local\Temp\hub-online-score-accounting.json
+[debug] [2023-02-18T08:41:03.827Z] > refreshing access token with scopes: []
+[debug] [2023-02-18T08:41:03.829Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2023-02-18T08:41:03.829Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-02-18T08:41:03.933Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 400
+[debug] [2023-02-18T08:41:03.933Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-02-18T08:41:03.933Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/online-score-accounting [none]
+[debug] [2023-02-18T08:41:04.029Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/online-score-accounting 401
+[debug] [2023-02-18T08:41:04.029Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/online-score-accounting {"error":{"code":401,"message":"Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.","status":"UNAUTHENTICATED"}}
+[debug] [2023-02-18T08:41:04.030Z] HTTP Error: 401, Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.
+[debug] [2023-02-18T08:41:04.030Z] Failed to retrieve default database instance: {"name":"FirebaseError","children":[],"exit":2,"message":"Failed to get Firebase project online-score-accounting. Please make sure the project exists and your account has permission to access it.","original":{"name":"FirebaseError","children":[],"context":{"body":{"error":{"code":401,"message":"Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.","status":"UNAUTHENTICATED"}},"response":{"statusCode":401}},"exit":1,"message":"HTTP Error: 401, Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.","status":401},"status":500} {"metadata":{"emulator":{"name":"database"},"message":"Failed to retrieve default database instance: {\"name\":\"FirebaseError\",\"children\":[],\"exit\":2,\"message\":\"Failed to get Firebase project online-score-accounting. Please make sure the project exists and your account has permission to access it.\",\"original\":{\"name\":\"FirebaseError\",\"children\":[],\"context\":{\"body\":{\"error\":{\"code\":401,\"message\":\"Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.\",\"status\":\"UNAUTHENTICATED\"}},\"response\":{\"statusCode\":401}},\"exit\":1,\"message\":\"HTTP Error: 401, Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.\",\"status\":401},\"status\":500}"}}
+[debug] [2023-02-18T08:41:04.030Z] database rules config:  [{"instance":"online-score-accounting-default-rtdb","rules":"C:\\Users\\samor\\Desktop\\practice_summer\\database.rules.json"}]
+[info] i  database: downloading firebase-database-emulator-v4.11.0.jar... {"metadata":{"emulator":{"name":"database"},"message":"downloading firebase-database-emulator-v4.11.0.jar..."}}
+[debug] [2023-02-18T08:41:04.038Z] >>> [apiv2][query] GET https://storage.googleapis.com/firebase-preview-drop/emulator/firebase-database-emulator-v4.11.0.jar 
+[debug] [2023-02-18T08:41:04.367Z] <<< [apiv2][status] GET https://storage.googleapis.com/firebase-preview-drop/emulator/firebase-database-emulator-v4.11.0.jar 200
+[debug] [2023-02-18T08:41:04.367Z] <<< [apiv2][body] GET https://storage.googleapis.com/firebase-preview-drop/emulator/firebase-database-emulator-v4.11.0.jar [stream]
+[info] i  database: Removing outdated emulator files: firebase-database-emulator-v4.7.3.jar {"metadata":{"emulator":{"name":"database"},"message":"Removing outdated emulator files: firebase-database-emulator-v4.7.3.jar"}}
+[debug] [2023-02-18T08:41:08.126Z] Ignoring unsupported arg: projectId {"metadata":{"emulator":{"name":"database"},"message":"Ignoring unsupported arg: projectId"}}
+[debug] [2023-02-18T08:41:08.126Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"database"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2023-02-18T08:41:08.126Z] Ignoring unsupported arg: rules {"metadata":{"emulator":{"name":"database"},"message":"Ignoring unsupported arg: rules"}}
+[debug] [2023-02-18T08:41:08.126Z] Starting Database Emulator with command {"binary":"java","args":["-Duser.language=en","-jar","C:\\Users\\samor\\.cache\\firebase\\emulators\\firebase-database-emulator-v4.11.0.jar","--host","127.0.0.1","--port",9000,"--single_project_mode","Warning"],"optionalArgs":["port","host","functions_emulator_port","functions_emulator_host","single_project_mode"],"joinArgs":false} {"metadata":{"emulator":{"name":"database"},"message":"Starting Database Emulator with command {\"binary\":\"java\",\"args\":[\"-Duser.language=en\",\"-jar\",\"C:\\\\Users\\\\samor\\\\.cache\\\\firebase\\\\emulators\\\\firebase-database-emulator-v4.11.0.jar\",\"--host\",\"127.0.0.1\",\"--port\",9000,\"--single_project_mode\",\"Warning\"],\"optionalArgs\":[\"port\",\"host\",\"functions_emulator_port\",\"functions_emulator_host\",\"single_project_mode\"],\"joinArgs\":false}"}}
+[info] i  database: Database Emulator logging to database-debug.log {"metadata":{"emulator":{"name":"database"},"message":"Database Emulator logging to \u001b[1mdatabase-debug.log\u001b[22m"}}
+[debug] [2023-02-18T08:41:10.432Z] > refreshing access token with scopes: []
+[debug] [2023-02-18T08:41:10.433Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2023-02-18T08:41:10.433Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-02-18T08:41:10.530Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 400
+[debug] [2023-02-18T08:41:10.531Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-02-18T08:41:10.531Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/online-score-accounting/sites 
+[debug] [2023-02-18T08:41:11.614Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/online-score-accounting/sites 401
+[debug] [2023-02-18T08:41:11.614Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/online-score-accounting/sites {"error":{"code":401,"message":"Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.","status":"UNAUTHENTICATED"}}
+[debug] [2023-02-18T08:41:11.614Z] Failed to list hosting sites
+[debug] HTTP Error: 401, Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.
+[debug] [2023-02-18T08:41:11.614Z] > refreshing access token with scopes: []
+[debug] [2023-02-18T08:41:11.615Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2023-02-18T08:41:11.615Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-02-18T08:41:11.724Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 400
+[debug] [2023-02-18T08:41:11.724Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-02-18T08:41:11.725Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/online-score-accounting/webApps/-/config [none]
+[debug] [2023-02-18T08:41:11.815Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/online-score-accounting/webApps/-/config 401
+[debug] [2023-02-18T08:41:11.815Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/online-score-accounting/webApps/-/config {"error":{"code":401,"message":"Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.","status":"UNAUTHENTICATED"}}
+[debug] [2023-02-18T08:41:11.816Z] fetchWebSetup error: FirebaseError: HTTP Error: 401, Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.
+[warn] !  hosting: Could not fetch web app configuration and there is no cached configuration on this machine. Check your internet connection and make sure you are authenticated. To continue, you must call firebase.initializeApp({...}) in your code before using Firebase. 
+[debug] [2023-02-18T08:41:11.818Z] > refreshing access token with scopes: []
+[debug] [2023-02-18T08:41:11.818Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2023-02-18T08:41:11.818Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-02-18T08:41:11.940Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 400
+[debug] [2023-02-18T08:41:11.940Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-02-18T08:41:11.940Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/online-score-accounting [none]
+[debug] [2023-02-18T08:41:12.032Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/online-score-accounting 401
+[debug] [2023-02-18T08:41:12.032Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/online-score-accounting {"error":{"code":401,"message":"Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.","status":"UNAUTHENTICATED"}}
+[debug] [2023-02-18T08:41:12.032Z] HTTP Error: 401, Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.
+[info] i  hosting[online-score-accounting]: Serving hosting files from: public {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1mpublic\u001b[22m"}}
+[info] +  hosting[online-score-accounting]: Local server: http://127.0.0.1:5000 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://127.0.0.1:5000\u001b[22m\u001b[24m"}}
+[info] i  ui: downloading ui-v1.11.4.zip... {"metadata":{"emulator":{"name":"ui"},"message":"downloading ui-v1.11.4.zip..."}}
+[debug] [2023-02-18T08:41:12.063Z] >>> [apiv2][query] GET https://storage.googleapis.com/firebase-preview-drop/emulator/ui-v1.11.4.zip 
+[debug] [2023-02-18T08:41:12.366Z] <<< [apiv2][status] GET https://storage.googleapis.com/firebase-preview-drop/emulator/ui-v1.11.4.zip 200
+[debug] [2023-02-18T08:41:12.367Z] <<< [apiv2][body] GET https://storage.googleapis.com/firebase-preview-drop/emulator/ui-v1.11.4.zip [stream]
+[info] i  ui: Removing outdated emulator files: ui-v1.6.4 {"metadata":{"emulator":{"name":"ui"},"message":"Removing outdated emulator files: ui-v1.6.4"}}
+[info] i  ui: Removing outdated emulator files: ui-v1.6.4.zip {"metadata":{"emulator":{"name":"ui"},"message":"Removing outdated emulator files: ui-v1.6.4.zip"}}
+[debug] [2023-02-18T08:41:15.381Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2023-02-18T08:41:15.381Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2023-02-18T08:41:15.382Z] Starting Emulator UI with command {"binary":"node","args":["C:\\Users\\samor\\.cache\\firebase\\emulators\\ui-v1.11.4\\server\\server.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"C:\\\\Users\\\\samor\\\\.cache\\\\firebase\\\\emulators\\\\ui-v1.11.4\\\\server\\\\server.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
+[info] i  ui: Emulator UI logging to ui-debug.log {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI logging to \u001b[1mui-debug.log\u001b[22m"}}
+[debug] [2023-02-18T08:41:15.522Z] Web / API server started at 127.0.0.1:4000
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at 127.0.0.1:4000\n"}}
+[debug] [2023-02-18T08:41:15.522Z] Web / API server started at ::1:4000
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at ::1:4000\n"}}
+[debug] [2023-02-18T08:41:15.659Z] >>> [apiv2][query] PUT http://127.0.0.1:9000/.settings/rules.json ns=online-score-accounting-default-rtdb
+[debug] [2023-02-18T08:41:15.660Z] >>> [apiv2][body] PUT http://127.0.0.1:9000/.settings/rules.json "{\n  \"rules\": {\n    \".read\": \"now < 2659214800000\",  // 2024-7-31\n    \".write\": \"now < 2659214800000\",  // 2022-7-31\n  }\n}"
+[debug] [2023-02-18T08:41:16.109Z] <<< [apiv2][status] PUT http://127.0.0.1:9000/.settings/rules.json 200
+[debug] [2023-02-18T08:41:16.109Z] <<< [apiv2][body] PUT http://127.0.0.1:9000/.settings/rules.json {"status":"ok"}
+[info] 
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+│ i  View Emulator UI at http://127.0.0.1:4000/               │
+└─────────────────────────────────────────────────────────────┘
+
+┌──────────┬────────────────┬────────────────────────────────┐
+│ Emulator │ Host:Port      │ View in Emulator UI            │
+├──────────┼────────────────┼────────────────────────────────┤
+│ Database │ 127.0.0.1:9000 │ http://127.0.0.1:4000/database │
+├──────────┼────────────────┼────────────────────────────────┤
+│ Hosting  │ 127.0.0.1:5000 │ n/a                            │
+└──────────┴────────────────┴────────────────────────────────┘
+  Emulator Hub running at 127.0.0.1:4400
+  Other reserved ports: 4500
+
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 
+[info] i  hosting: 127.0.0.1 - - [18/Feb/2023:08:41:58 +0000] "GET / HTTP/1.1" 404 139 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [18/Feb/2023:08:41:58 +0000] \"GET / HTTP/1.1\" 404 139 \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36\""}}
+[debug] [2023-02-18T08:42:10.641Z] ----------------------------------------------------------------------
+[debug] [2023-02-18T08:42:10.642Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\samor\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js hosting:channel:deploy
+[debug] [2023-02-18T08:42:10.643Z] CLI Version:   11.23.1
+[debug] [2023-02-18T08:42:10.643Z] Platform:      win32
+[debug] [2023-02-18T08:42:10.643Z] Node Version:  v16.15.1
+[debug] [2023-02-18T08:42:10.644Z] Time:          Sat Feb 18 2023 11:42:10 GMT+0300 (Москва, стандартное время)
+[debug] [2023-02-18T08:42:10.644Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-02-18T08:42:10.707Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-02-18T08:42:10.708Z] > authorizing via signed-in user (ibabyshka74@gmail.com)
+[debug] [2023-02-18T08:42:10.708Z] [iam] checking project online-score-accounting for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2023-02-18T08:42:10.709Z] > refreshing access token with scopes: []
+[debug] [2023-02-18T08:42:10.711Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2023-02-18T08:42:10.711Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-02-18T08:42:10.831Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 400
+[debug] [2023-02-18T08:42:10.831Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-02-18T08:42:10.831Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/online-score-accounting:testIamPermissions [none]
+[debug] [2023-02-18T08:42:10.831Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/online-score-accounting:testIamPermissions x-goog-quota-user=projects/online-score-accounting
+[debug] [2023-02-18T08:42:10.831Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/online-score-accounting:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-02-18T08:42:11.623Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/online-score-accounting:testIamPermissions 401
+[debug] [2023-02-18T08:42:11.623Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/online-score-accounting:testIamPermissions {"error":{"code":401,"message":"Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.","status":"UNAUTHENTICATED","details":[{"@type":"type.googleapis.com/google.rpc.ErrorInfo","reason":"ACCESS_TOKEN_TYPE_UNSUPPORTED","metadata":{"method":"google.cloudresourcemanager.v1.Projects.TestIamPermissions","service":"cloudresourcemanager.googleapis.com"}}]}}
+[debug] [2023-02-18T08:42:11.624Z] [iam] error while checking permissions, command may fail: FirebaseError: HTTP Error: 401, Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.
+[debug] [2023-02-18T08:42:11.624Z] > refreshing access token with scopes: []
+[debug] [2023-02-18T08:42:11.624Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2023-02-18T08:42:11.624Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-02-18T08:42:11.731Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 400
+[debug] [2023-02-18T08:42:11.731Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-02-18T08:42:11.732Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/online-score-accounting [none]
+[debug] [2023-02-18T08:42:11.827Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/online-score-accounting 401
+[debug] [2023-02-18T08:42:11.827Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/online-score-accounting {"error":{"code":401,"message":"Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.","status":"UNAUTHENTICATED"}}
+[debug] [2023-02-18T08:42:11.827Z] HTTP Error: 401, Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.
+[debug] [2023-02-18T08:42:11.919Z] FirebaseError: HTTP Error: 401, Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.
+    at responseToError (C:\Users\samor\AppData\Roaming\npm\node_modules\firebase-tools\lib\responseToError.js:49:12)
+    at RetryOperation._fn (C:\Users\samor\AppData\Roaming\npm\node_modules\firebase-tools\lib\apiv2.js:288:77)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+[error] 
+[error] Error: Failed to get Firebase project online-score-accounting. Please make sure the project exists and your account has permission to access it.

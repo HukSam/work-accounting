@@ -44,7 +44,6 @@ export default {
   },
   methods: {
     async signIn() {
-      console.log('start 1');
       await signInWithEmailAndPassword(getAuth(), this.user.email, this.user.password).then(
           async (userCredential) => {
             const user = userCredential.user

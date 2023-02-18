@@ -82,17 +82,7 @@ export default {
   methods: {
     async register() {
       if (this.user.password === this.user.repeatedPassword) {
-        /*this.user.id = Date.now()
-        this.$emit('create', this.user)
-        this.axios.post('http://127.0.0.1:8000/login', {
-          email:'test1@mail.ru',
-          password:'23030327'
-        })
-          .then((response) => {
-            console.log(response.data)
-          })
-        this.authVisible = false
-        */
+
         await createUserWithEmailAndPassword(getAuth(), this.user.email, this.user.password).then(
           async (userCredential) => {
             const user = userCredential.user
@@ -111,6 +101,7 @@ export default {
             alert(err)
           },
         )
+        
       } else {
         alert('Пароли не совпадают!')
       }
@@ -152,6 +143,7 @@ form {
 
   .submit-btn {
     margin-top: 20px;
+    cursor: pointer;
   }
 
   span {

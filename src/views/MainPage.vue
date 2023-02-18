@@ -190,6 +190,7 @@ import GroupList from '@/components/GroupList.vue'
 import { checkOfRegistration } from '@/stores/checkOfRegistration'
 import AccountInfo from '@/components/AccountInfo.vue'
 import SignInForm from '../components/UI/User/SignIn.vue'
+import ChangeEmail from '@/components/ChangeEmail.vue'
 
 export default {
   components: {
@@ -204,7 +205,8 @@ export default {
     PracticeList,
     RegistrationForm,
     AccountInfo,
-    SignInForm
+    SignInForm,
+    ChangeEmail
   },
 
   setup: () => ({
@@ -226,6 +228,7 @@ export default {
       dialogVisibleStudents: false,
       authVisible: false,
       accountVisible: false,
+      changeUserEmail: false,
       signInVisible: false,
       studentInfoSearch: false,
       groupIndex: 0,
@@ -352,6 +355,12 @@ export default {
     },
     showAccountVisible() {
       this.accountVisible = true
+    },
+    showChangeEmail() {
+      this.changeUserEmail = true
+    },
+    hideChangeEmail() {
+      this.changeUserEmail = false
     },
     hideDialogGroups() {
       this.dialogVisibleGroups = false

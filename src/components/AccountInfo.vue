@@ -2,10 +2,19 @@
   <div class="wrapper-account-info">
     <h2>Информация об аккаунте</h2>
 
-    <my-button class="btn-account">
+    <my-button 
+      class="btn-account"
+      @click="showChangeEmail"
+    >
       Сменить email
     </my-button>
-
+    <my-dialog
+      :show="changeUserEmail"
+      @click="hideChangeEmail"
+      >
+        <change-email
+        />
+    </my-dialog>
     <my-button
       class="btn-account"
       @click="$emit('accountSignOut')"
@@ -17,19 +26,32 @@
 
 <script>
 import MyButton from '@/components/UI/MyButton.vue'
+import MyDialog from './UI/MyDialog.vue';
+import ChangeEmail from './ChangeEmail.vue';
 
 export default {
   name: 'account-info',
 
   components: {
-    MyButton
+    MyButton,
+    MyDialog,
+    ChangeEmail
   },
 
   data() {
-    return {}
+    return {
+      changeUserEmail: false
+    }
   },
 
-  methods: {},
+  methods: {
+    showChangeEmail() {
+      this.changeUserEmail = true
+    },
+    hideChangeEmail() {
+      this.changeUserEmail = false
+    }
+  },
 }
 </script>
 
