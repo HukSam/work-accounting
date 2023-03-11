@@ -85,6 +85,7 @@ export default {
 
         await createUserWithEmailAndPassword(getAuth(), this.user.email, this.user.password).then(
           async (userCredential) => {
+            
             const user = userCredential.user
 
             await setDoc(doc(db, 'users', user.uid), {

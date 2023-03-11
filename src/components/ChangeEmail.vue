@@ -22,7 +22,7 @@
       />
       <my-input
         v-model.trim="user.repeatedNewEmail"
-        placeholder="Подтверждение email:"
+        placeholder="Подтвердите email:"
         type="text"
       />
       <my-input
@@ -42,7 +42,10 @@
 <script>
 import MyButton from '@/components/UI/MyButton.vue'
 import MyInput from './UI/MyInput.vue';
-import { getAuth, updateEmail } from "firebase/auth";
+import { getAuth, updateEmail, signOut } from 'firebase/auth'
+import { checkOfRegistration } from '@/stores/checkOfRegistration'
+import { doc, updateDoc } from 'firebase/firestore'
+import { db } from '@/main'
 
 export default {
   name: 'change-email',
@@ -51,7 +54,9 @@ export default {
     MyButton,
     MyInput
   },
-
+  setup: () => ({
+    userStore: checkOfRegistration(),
+  }),
   data() {
     return {
       user: {
@@ -65,26 +70,34 @@ export default {
 
   methods: {
     async changeUserEmail() {
-        if ( this.user.newEmail === this.user.repeatedNewEmail) {
-                
-            await updateEmail(getAuth().currentUser, this.newEmail).then(()=> {
-              
-            })
-            this.$emit('hide')
+      if ( this.user.newEmail === this.user.repeatedNewEmail) {
+          // samorod1010@mail.ru
+          const auth = getAuth()
+          updateEmail(auth.currentUser, this.user.newEmail).then(()=> {            
+            console.log('email updated!');
+          })
+          .catch(() => {
+            console.log(error);
+          })
 
-            /*
-            const user = firebase.auth().currentUser;
-            this.user.password = user.password
-    
-            user.updateEmail(this.user.newEmail)
-            */
-            // samorodsky1111@mail.ru
-            this.$emit('hide')
-            console.log(this.user.newEmail)
-        } else {
+          console.log(auth.currentUser.uid);
+          
+          await updateDoc(doc(db, 'users', auth.currentUser.uid), {
+              email: this.user.newEmail
+          })
+          .catch(() => {
+                console.log(error);
+          })
+
+          localStorage.clear()
+          this.userStore.$reset()
+          this.$emit('hide')
+          window.location.reload();
+        } 
+        
+        else {
             alert('Почты не совпадают!')
         }
-
         if (this.user.newEmail === '') {
         this.errors.push('Введите почту!')
         }
