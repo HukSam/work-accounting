@@ -61,19 +61,24 @@
       }
     },
     methods: {
-      addStudentToGroup(student) {
-        console.log('add Student To Group1');
-        this.studentsInGroup.push(student)
-        console.log(this.studentsInGroup)
-        this.students.splice(this.students.indexOf(student))
-        console.log(this.students)
+      async addStudentToGroup(student) {
+      const userStudent = doc(db, 'university', 'bstu')
+        await updateDoc(userStudent, {
+          studentsInGroup: arrayUnion(student)
+      })
       },
-      removeStudentFromGroup(studentInGroup) {
-        console.log('remove Student From Group');
-        this.students.push(studentInGroup)
-        console.log(this.students)
-        this.studentsInGroup.splice(this.studentsInGroup.indexOf(studentInGroup))
-        console.log(this.studentsInGroup);
+      subscribeStudent() {
+        onSnapshot(doc(db, 'university', 'bstu'), (doc) => {
+          if (doc.exists()) {
+            this.students = doc.data().students
+          }
+        })
+      },
+      async removeStudentFromGroup(studentInGroup) {
+        const userStudent = doc(db, 'university', 'bstu','groups')
+        await updateDoc(userStudent, {
+          studentInGroup: studentInGroup
+        })  
       }
 
     }
