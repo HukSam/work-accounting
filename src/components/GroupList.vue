@@ -3,9 +3,9 @@
     <h3>Список групп</h3>
     <group-item
       v-for="group in groups"
+      :students="students"
       :key="group.id"
       :group="group"
-      :rights="rights"
       @remove="$emit('remove',group)"
     />
   </div>
@@ -23,8 +23,6 @@ export default {
   },
   data() {
     return {
-      studentPractice:
-        []
     }
   },
   props: {
@@ -32,8 +30,8 @@ export default {
       type: Array,
       required: true
     },
-    rights: {
-      type: String,
+    students: {
+      type: Array,
       required: true
     }
   }

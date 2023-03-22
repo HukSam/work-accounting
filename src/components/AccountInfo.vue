@@ -5,7 +5,7 @@
       class="btn-account"
       @click="showChangeEmail"
     >
-      Сменить email
+      Сменить почту
     </my-button>
       <my-dialog
         :show="changeUserEmail"
@@ -18,7 +18,7 @@
       class="btn-account"
       @click="showChangePassword"
     >
-      Сменить password
+      Сменить пароль
     </my-button>
       <my-dialog
         :show="changeUserPassword"

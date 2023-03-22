@@ -14,7 +14,11 @@
         <my-dialog
           v-model:show="groupInfo"
         >
-          <group-info :groups="group" rights=""/>
+          <group-info 
+          :group="group"
+          :studentsInGroup="studentsInGroup"
+          :students="students"
+          />
         </my-dialog>
       </div>
 
@@ -40,25 +44,24 @@ export default {
   },
   data() {
     return {
+      studentsInGroup: [],
       groupInfo: false
     }
   },
-
   props: {
     group: {
       type: Object,
       required: true
     },
-    rights: {
-      type: String,
+    students: {
+      type: Array,
       required: true
     }
   },
-
   methods: {
     showGroupInfo() {
       this.groupInfo = true
-    },
+    },  
     async removeGroup(group) {
       this.$emit('remove', group)
     }

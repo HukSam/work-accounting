@@ -132,6 +132,8 @@ form {
   h4 {
     color: #80002f;
     cursor: pointer;
+    margin-top: 10px;
+    margin-bottom: 15px;
   }
 
   ul {
@@ -143,7 +145,7 @@ form {
   }
 
   .submit-btn {
-    margin-top: 20px;
+    margin-top: 35px;
     cursor: pointer;
   }
 

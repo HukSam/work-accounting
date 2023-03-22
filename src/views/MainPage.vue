@@ -109,11 +109,13 @@
             >
               <group-form
                 :rights="user.rights"
+                :students="students"
                 @create="createGroup"
               />
             </my-dialog>
             <group-list
               :groups="groups"
+              :students="students"
               rights="user.rights"
               @remove="removeGroup"/>
           </div>
@@ -274,7 +276,6 @@ export default {
       this.searchingStudent = searchingStudent.name
     },
     async createGroup(group) {
-
       await updateDoc(doc(db, 'university', 'bstu'), {
         groups: arrayUnion(group)
       })
@@ -395,6 +396,9 @@ export default {
 button {
   padding: 0;
 }
+ h2 {
+  color: black;
+ }
 
 html, body {
   height: 100vh;

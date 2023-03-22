@@ -1,54 +1,45 @@
 <template>
   <div class="wrapper-student-info-add">
     <h2>Информация о группе</h2>
-    <my-button
-      class="btn-add-student"
-      @click="showDialog"
-    >
-      Добавить студента
-    </my-button>
-    <my-dialog
-      :show="dialogVisible"
-    >
-      <student-form
-        @create="createStudent"
-      />
-    </my-dialog>
-
-    <student-list
+    <students-group-list
       :students="students"
-      @remove="removeStudent"
+      :studentsInGroup="studentsInGroup"
+      :group="group"
+      @remove="removeStudent" 
     />
   </div>
 </template>
 
 <script>
 import StudentForm from '@/components/StudentForm.vue'
-import StudentList from '@/components/StudentList.vue'
+import StudentsGroupList from '@/components/StudentsGroupList.vue'
 import MyDialog from '@/components/UI/MyDialog.vue'
 import MyButton from '@/components/UI/MyButton.vue'
+
 
 export default {
   components: {
     StudentForm,
-    StudentList,
+    StudentsGroupList,
     MyDialog,
     MyButton
   },
   data() {
     return {
-      students:
-        [],
       //dialogVisible: false
     }
   },
   props: {
-    groups: {
+    group: {
       type: Object,
       required: true
     },
-    rights: {
-      type: String,
+    students: {
+      type: Array,
+      required: true
+    },
+    studentsInGroup: {
+      type: Array,
       required: true
     }
   },
