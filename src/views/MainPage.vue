@@ -4,7 +4,7 @@
       <div class="nav-menu">
         <div class="item group"><h2>ГРУППА: О-20-ПРИ</h2></div>
 
-        <div class="item mode"><h2>РЕЖИМ:</h2></div>
+        <div class="item mode"><h2>РОЛЬ:</h2></div>
 
         <div class="search-input">
           <my-input
@@ -396,9 +396,6 @@ export default {
 button {
   padding: 0;
 }
- h2 {
-  color: black;
- }
 
 html, body {
   height: 100vh;
