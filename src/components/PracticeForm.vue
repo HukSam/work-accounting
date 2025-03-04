@@ -1,60 +1,45 @@
 <template>
-  <form @submit.prevent>
-    <h4>Добавление практики</h4>
-    <my-input
-      v-model="practice.name"
-      placeholder="Название практики"
-      type="text"
-    />
-    <my-input
-      v-model="practice.points"
-      placeholder="Баллы"
-      type="text"
-    />
-    <my-button
-      @click="createPractice"
-    >
-      Добавить
-    </my-button>
-  </form>
+	<form @submit.prevent>
+		<h4>Добавление практики</h4>
+		<my-input
+			v-model="practice.name"
+			placeholder="Название практики"
+			type="text"
+		/>
+		<my-input
+			v-model="practice.points"
+			placeholder="Баллы"
+			type="text"
+		/>
+		<my-button @click="createPractice">
+	        Добавить
+		</my-button>
+	</form>
 </template>
 
-<script>
+<script setup>
+import { ref, defineEmits } from 'vue'
 import MyInput from '@/components/UI/MyInput.vue'
 import MyButton from '@/components/UI/MyButton.vue'
 
-export default {
-  components: {
-    MyInput,
-    MyButton
-  },
-  name: 'practice-form',
-  data() {
-    return {
-      practice: {
-        name: '',
-        points: '',
-        uid: []
-      },
-      studentPractice: {
-        name: '',
-        points: ''
-      }
-    }
-  },
-  methods: {
-    async createPractice() {
-      this.practice.id = Date.now()
-      this.$emit('create', this.practice)
-      this.practice = {
-        name: '',
-        points: ''
-      }
+const practice = ref( {
+    name: '',
+    points: '',
+    uid: []
+})
+const studentPractice = ref( {
+    name: '',
+	points: ''
+})
+const emit = defineEmits(['hide'])
 
-      this.dialogVisible = false
-    }
-  },
-  rights: ''
+const createPractice = async() => {
+	practice.value.id = Date.now()
+	practice.value.name = ''
+	practice.value.points = ''
+
+	emit('create', practice.value)
+	emit('emit')
 }
 </script>
 

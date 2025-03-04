@@ -1,20 +1,23 @@
 <template>
-  <input :value="modelValue" class="input" type="text" @input="updateInput"/>
+	<input
+		:value="modelValue"
+		class="input"
+		type="text"
+		@input="updateInput"
+	/>
 </template>
 
-<script>
-export default {
-  name: 'my-input',
-
-  props: {
-    modelValue: [String, Number]
-  },
-
-  methods: {
-    updateInput(event) {
-      this.$emit('update:modelValue', event.target.value)
-    }
-  }
+<script setup>
+import { defineEmits, defineProps } from 'vue'
+defineProps({
+	modelValue: {
+		type: [String, Number],
+		default: null
+	}
+})
+const emit = defineEmits(['update:show'])
+const updateInput = (event) => {
+	emit('update:modelValue', event.target.value)
 }
 </script>
 

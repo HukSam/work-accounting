@@ -1,62 +1,47 @@
 <template>
-  <form @submit.prevent>
-    <h4>Добавление студента</h4>
-    <my-input
-      v-model="student.name"
-      placeholder="Фамилия"
-      type="text"
-    />
-    <my-input
-      v-model="student.points"
-      placeholder="Баллы"
-      type="text"
-    />
-    <my-input
-      v-model="student.email"
-      placeholder="Почта"
-      type="email"
-    />
-    <my-button
-      @click="createUser"
-    >
-      Добавить
-    </my-button>
-  </form>
+	<form @submit.prevent>
+		<h4>Добавление студента</h4>
+		<my-input
+			v-model="student.name"
+			placeholder="Фамилия"
+			type="text"
+		/>
+		<my-input
+			v-model="student.points"
+			placeholder="Баллы"
+			type="text"
+		/>
+		<my-input
+			v-model="student.email"
+			placeholder="Почта"
+			type="email"
+		/>
+		<my-button @click="createUser">
+			Добавить
+		</my-button>
+	</form>
 </template>
 
-<script>
+<script setup>
+import { ref, defineEmits } from 'vue'
 import MyInput from '@/components/UI/MyInput.vue'
 import MyButton from '@/components/UI/MyButton.vue'
 
+const student = ref({
+	name: '',
+	points: '',
+	mark: '',
+	email: ''
+})
+const emit = defineEmits(['hide', 'create'])
 
-export default {
-  components: {
-    MyInput,
-    MyButton
-  },
-  data() {
-    return {
-      student: {
-        name: '',
-        points: '',
-        mark: '',
-        email: ''
-      }
-    }
-  },
-  methods: {
-    async createUser() {
-      this.student.id = Date.now()
-      this.$emit('create', this.student)
-      this.student = {
-        name: '',
-        points: ''
-      }
+const createUser = async() =>  {
+	student.value.id = Date.now()
+	student.value.name = ''
+	student.value.points = ''
 
-      this.dialogVisible = false
-    },
-
-  }
+	emit('create', student.value)
+	emit('hide')
 }
 </script>
 

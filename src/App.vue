@@ -2,12 +2,6 @@
   <router-view/>
 </template>
 
-<script>
+<script setup></script>
 
-export default {
-  name: 'app-main'
-}
-</script>
-
-<style>
-</style>
+<style></style>

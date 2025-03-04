@@ -26,35 +26,27 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, defineProps, defineEmits } from 'vue'
 
-export default {
-  components: {
-    // MyDialog
-  },
-  data() {
-    return {
-      practiceInfo: false
-    }
-  },
-  props: {
-    practice: {
-      type: Object,
-      required: true
-    }
-  },
-  methods: {
-    confirmPoints(practice) {
-      document.getElementById('edit-btn').style.display = 'inline'
-      document.getElementById('done-btn').style.display = 'none'
-      practice.points = document.getElementById('result').value
-      document.getElementsByClassName('wrapper-points').innerHTML += document.getElementById('result').value
-      console.log(practice.points)
-    },
-    async removePractice(practice) {
-      this.$emit('remove', practice)
-    }
-  }
+const practiceInfo = ref(false)
+const props = defineProps({
+	practice: {
+		type: Object,
+		required: true
+	}
+})
+const emit = defineEmits(['hide'])
+
+const confirmPoints = (practice) => {
+	document.getElementById('edit-btn').style.display = 'inline'
+	document.getElementById('done-btn').style.display = 'none'
+	practice.points = document.getElementById('result').value
+	document.getElementsByClassName('wrapper-points').innerHTML += document.getElementById('result').value
+	console.log(practice.points)
+}
+const removePractice = async(practice) => {
+	emit('remove', practice)
 }
 </script>
 
